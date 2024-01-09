@@ -1,0 +1,10 @@
+repo_name: 2lambda123/home-assistant-core
+report_id: ba395f4ee508b6853b66f44379666e0b
+version: 0.1
+repo_type: Public
+timestamp: '2024-01-09T07:57:37+00:00'
+requested_by: 2lambda123
+provider: github
+branch: master
+detected_tools_count: 0
+tools: []
