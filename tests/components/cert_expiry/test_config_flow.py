@@ -209,7 +209,7 @@ async def test_abort_on_socket_failed(hass: HomeAssistant) -> None:
 
     with patch(
         "homeassistant.components.cert_expiry.helper.get_cert",
-        side_effect=socket.timeout(),
+        side_effect=TimeoutError(),
     ):
         result = await hass.config_entries.flow.async_configure(
             result["flow_id"], user_input={CONF_HOST: HOST}

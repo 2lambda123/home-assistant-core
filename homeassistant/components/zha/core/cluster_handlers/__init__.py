@@ -1,7 +1,6 @@
 """Cluster handlers module for Zigbee Home Automation."""
 from __future__ import annotations
 
-import asyncio
 from collections.abc import Awaitable, Callable, Coroutine, Iterator
 import contextlib
 from enum import Enum
@@ -62,7 +61,7 @@ def wrap_zigpy_exceptions() -> Iterator[None]:
     """Wrap zigpy exceptions in `HomeAssistantError` exceptions."""
     try:
         yield
-    except asyncio.TimeoutError as exc:
+    except TimeoutError as exc:
         raise HomeAssistantError(
             "Failed to send request: device did not respond"
         ) from exc
@@ -214,7 +213,7 @@ class ClusterHandler(LogMixin):
                     },
                 },
             )
-        except (zigpy.exceptions.ZigbeeException, asyncio.TimeoutError) as ex:
+        except (TimeoutError, zigpy.exceptions.ZigbeeException) as ex:
             self.debug(
                 "Failed to bind '%s' cluster: %s",
                 self.cluster.ep_attribute,
@@ -278,7 +277,7 @@ class ClusterHandler(LogMixin):
                 # if we get a response, then it's a success
                 for attr_stat in event_data.values():
                     attr_stat["success"] = True
-            except (zigpy.exceptions.ZigbeeException, asyncio.TimeoutError) as ex:
+            except (TimeoutError, zigpy.exceptions.ZigbeeException) as ex:
                 self.debug(
                     "failed to set reporting on '%s' cluster for: %s",
                     self.cluster.ep_attribute,
@@ -495,7 +494,7 @@ class ClusterHandler(LogMixin):
                     manufacturer=manufacturer,
                 )
                 result.update(read)
-            except (asyncio.TimeoutError, zigpy.exceptions.ZigbeeException) as ex:
+            except (TimeoutError, zigpy.exceptions.ZigbeeException) as ex:
                 self.debug(
                     "failed to get attributes '%s' on '%s' cluster: %s",
                     chunk,

@@ -149,7 +149,7 @@ class MjpegCamera(Camera):
                 image = await response.read()
                 return image
 
-        except asyncio.TimeoutError:
+        except TimeoutError:
             LOGGER.error("Timeout getting camera image from %s", self.name)
 
         except aiohttp.ClientError as err:
@@ -183,7 +183,7 @@ class MjpegCamera(Camera):
                     stream.aiter_bytes(BUFFER_SIZE)
                 )
 
-        except asyncio.TimeoutError:
+        except TimeoutError:
             LOGGER.error("Timeout getting camera image from %s", self.name)
 
         except httpx.HTTPError as err:

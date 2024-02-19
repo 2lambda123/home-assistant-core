@@ -45,7 +45,7 @@ async def get_cert_expiry_timestamp(
         cert = await hass.async_add_executor_job(get_cert, hostname, port)
     except socket.gaierror as err:
         raise ResolveFailed(f"Cannot resolve hostname: {hostname}") from err
-    except socket.timeout as err:
+    except TimeoutError as err:
         raise ConnectionTimeout(
             f"Connection timeout with server: {hostname}:{port}"
         ) from err

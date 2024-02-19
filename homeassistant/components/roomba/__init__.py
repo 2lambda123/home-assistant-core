@@ -90,7 +90,7 @@ async def async_connect_or_timeout(
     except RoombaConnectionError as err:
         _LOGGER.debug("Error to connect to vacuum: %s", err)
         raise CannotConnect from err
-    except asyncio.TimeoutError as err:
+    except TimeoutError as err:
         # api looping if user or password incorrect and roomba exist
         await async_disconnect_or_timeout(hass, roomba)
         _LOGGER.debug("Timeout expired: %s", err)

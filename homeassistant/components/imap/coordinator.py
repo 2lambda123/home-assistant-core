@@ -344,7 +344,7 @@ class ImapDataUpdateCoordinator(DataUpdateCoordinator[int | None]):
                 await self.imap_client.stop_wait_server_push()
                 await self.imap_client.close()
                 await self.imap_client.logout()
-            except (AioImapException, asyncio.TimeoutError):
+            except (TimeoutError, AioImapException):
                 if log_error:
                     _LOGGER.debug("Error while cleaning up imap connection")
             finally:
@@ -373,11 +373,7 @@ class ImapPollingDataUpdateCoordinator(ImapDataUpdateCoordinator):
             messages = await self._async_fetch_number_of_messages()
             self.auth_errors = 0
             return messages
-        except (
-            AioImapException,
-            UpdateFailed,
-            asyncio.TimeoutError,
-        ) as ex:
+        except (TimeoutError, AioImapException, UpdateFailed) as ex:
             await self._cleanup()
             self.async_set_update_error(ex)
             raise UpdateFailed() from ex
@@ -445,11 +441,7 @@ class ImapPushDataUpdateCoordinator(ImapDataUpdateCoordinator):
                 self.async_set_update_error(ex)
                 await asyncio.sleep(BACKOFF_TIME)
                 continue
-            except (
-                UpdateFailed,
-                AioImapException,
-                asyncio.TimeoutError,
-            ) as ex:
+            except (TimeoutError, UpdateFailed, AioImapException) as ex:
                 await self._cleanup()
                 self.async_set_update_error(ex)
                 await asyncio.sleep(BACKOFF_TIME)
@@ -465,7 +457,7 @@ class ImapPushDataUpdateCoordinator(ImapDataUpdateCoordinator):
                     await idle
 
             # From python 3.11 asyncio.TimeoutError is an alias of TimeoutError
-            except (AioImapException, asyncio.TimeoutError):
+            except (TimeoutError, AioImapException):
                 _LOGGER.debug(
                     "Lost %s (will attempt to reconnect after %s s)",
                     self.config_entry.data[CONF_SERVER],

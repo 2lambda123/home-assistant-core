@@ -92,7 +92,7 @@ async def test_info_endpoint_register_callback_timeout(
     """Test that the info endpoint timing out."""
 
     async def mock_info(hass):
-        raise asyncio.TimeoutError
+        raise TimeoutError
 
     hass.components.system_health.async_register_info("lovelace", mock_info)
     assert await async_setup_component(hass, "system_health", {})

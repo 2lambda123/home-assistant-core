@@ -1,7 +1,6 @@
 """Support for the NextDNS service."""
 from __future__ import annotations
 
-import asyncio
 from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any, Generic
@@ -644,12 +643,7 @@ class NextDnsSwitch(CoordinatorEntity[NextDnsSettingsUpdateCoordinator], SwitchE
             result = await self.coordinator.nextdns.set_setting(
                 self.coordinator.profile_id, self.entity_description.key, new_state
             )
-        except (
-            ApiError,
-            ClientConnectorError,
-            asyncio.TimeoutError,
-            ClientError,
-        ) as err:
+        except (TimeoutError, ApiError, ClientConnectorError, ClientError) as err:
             raise HomeAssistantError(
                 "NextDNS API returned an error calling set_setting for"
                 f" {self.entity_id}: {err}"

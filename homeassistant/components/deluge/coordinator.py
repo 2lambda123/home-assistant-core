@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 from datetime import timedelta
-import socket
 from ssl import SSLError
 from typing import Any
 
@@ -51,8 +50,8 @@ class DelugeDataUpdateCoordinator(
                 self.api.call, "core.get_torrents_status", {}, ["paused"]
             )
         except (
+            TimeoutError,
             ConnectionRefusedError,
-            socket.timeout,
             SSLError,
             FailedToReconnectException,
         ) as ex:

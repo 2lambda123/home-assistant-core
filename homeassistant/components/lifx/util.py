@@ -236,8 +236,6 @@ async def async_multi_execute_lifx_with_retries(
 
     if failed:
         failed_methods = ", ".join(failed)
-        raise asyncio.TimeoutError(
-            f"{failed_methods} timed out after {attempts} attempts"
-        )
+        raise TimeoutError(f"{failed_methods} timed out after {attempts} attempts")
 
     return results

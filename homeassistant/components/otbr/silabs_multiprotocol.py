@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import logging
 
 import aiohttp
@@ -61,11 +60,7 @@ async def async_get_channel(hass: HomeAssistant) -> int | None:
 
     try:
         dataset = await data.get_active_dataset()
-    except (
-        HomeAssistantError,
-        aiohttp.ClientError,
-        asyncio.TimeoutError,
-    ) as err:
+    except (TimeoutError, HomeAssistantError, aiohttp.ClientError) as err:
         _LOGGER.warning("Failed to communicate with OTBR %s", err)
         return None
 

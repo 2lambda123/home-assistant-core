@@ -580,7 +580,7 @@ class HassIO:
 
             return await request.json()
 
-        except asyncio.TimeoutError:
+        except TimeoutError:
             _LOGGER.error("Timeout on %s request", command)
 
         except aiohttp.ClientError as err:

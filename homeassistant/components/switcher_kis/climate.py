@@ -1,7 +1,6 @@
 """Switcher integration Climate platform."""
 from __future__ import annotations
 
-import asyncio
 from typing import Any, cast
 
 from aioswitcher.api import SwitcherBaseResponse, SwitcherType2Api
@@ -165,7 +164,7 @@ class SwitcherClimateEntity(
                 self.coordinator.data.ip_address, self.coordinator.data.device_id
             ) as swapi:
                 response = await swapi.control_breeze_device(self._remote, **kwargs)
-        except (asyncio.TimeoutError, OSError, RuntimeError) as err:
+        except (TimeoutError, OSError, RuntimeError) as err:
             error = repr(err)
 
         if error or not response or not response.successful:

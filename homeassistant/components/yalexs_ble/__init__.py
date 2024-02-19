@@ -1,8 +1,6 @@
 """The Yale Access Bluetooth integration."""
 from __future__ import annotations
 
-import asyncio
-
 from yalexs_ble import (
     AuthError,
     ConnectionInfo,
@@ -83,7 +81,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         await push_lock.wait_for_first_update(DEVICE_TIMEOUT)
     except AuthError as ex:
         raise ConfigEntryAuthFailed(str(ex)) from ex
-    except (YaleXSBLEError, asyncio.TimeoutError) as ex:
+    except (TimeoutError, YaleXSBLEError) as ex:
         raise ConfigEntryNotReady(
             f"{ex}; Try moving the Bluetooth adapter closer to {local_name}"
         ) from ex

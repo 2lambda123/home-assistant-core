@@ -1,7 +1,6 @@
 """Config flow to configure the honeywell integration."""
 from __future__ import annotations
 
-import asyncio
 from collections.abc import Mapping
 from typing import Any
 
@@ -59,9 +58,9 @@ class HoneywellConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 errors["base"] = "invalid_auth"
 
             except (
+                TimeoutError,
                 aiosomecomfort.ConnectionError,
                 aiosomecomfort.ConnectionTimeout,
-                asyncio.TimeoutError,
             ):
                 errors["base"] = "cannot_connect"
 
@@ -93,9 +92,9 @@ class HoneywellConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             except aiosomecomfort.AuthError:
                 errors["base"] = "invalid_auth"
             except (
+                TimeoutError,
                 aiosomecomfort.ConnectionError,
                 aiosomecomfort.ConnectionTimeout,
-                asyncio.TimeoutError,
             ):
                 errors["base"] = "cannot_connect"
 

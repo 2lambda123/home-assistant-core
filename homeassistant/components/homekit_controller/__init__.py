@@ -43,7 +43,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     try:
         await conn.async_setup()
     except (
-        asyncio.TimeoutError,
+        TimeoutError,
         AccessoryNotFoundError,
         EncryptionError,
         AccessoryDisconnectedError,

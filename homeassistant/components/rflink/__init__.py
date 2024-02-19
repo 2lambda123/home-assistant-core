@@ -282,11 +282,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             async with asyncio.timeout(CONNECTION_TIMEOUT):
                 transport, protocol = await connection
 
-        except (
-            SerialException,
-            OSError,
-            asyncio.TimeoutError,
-        ):
+        except (TimeoutError, SerialException, OSError):
             reconnect_interval = config[DOMAIN][CONF_RECONNECT_INTERVAL]
             _LOGGER.exception(
                 "Error connecting to Rflink, reconnecting in %s", reconnect_interval

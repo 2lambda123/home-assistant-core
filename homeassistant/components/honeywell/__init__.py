@@ -1,5 +1,4 @@
 """Support for Honeywell (US) Total Connect Comfort climate systems."""
-import asyncio
 from dataclasses import dataclass
 
 import aiosomecomfort
@@ -61,10 +60,10 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> b
         raise ConfigEntryAuthFailed("Incorrect Password") from ex
 
     except (
+        TimeoutError,
         aiosomecomfort.device.ConnectionError,
         aiosomecomfort.device.ConnectionTimeout,
         aiosomecomfort.device.SomeComfortError,
-        asyncio.TimeoutError,
     ) as ex:
         raise ConfigEntryNotReady(
             "Failed to initialize the Honeywell client: Connection error"

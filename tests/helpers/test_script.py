@@ -654,7 +654,7 @@ async def test_delay_basic(hass: HomeAssistant) -> None:
 
         assert script_obj.is_running
         assert script_obj.last_action == delay_alias
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -695,7 +695,7 @@ async def test_multiple_runs_delay(hass: HomeAssistant) -> None:
         assert script_obj.is_running
         assert len(events) == 1
         assert events[-1].data["value"] == 1
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -725,7 +725,7 @@ async def test_delay_template_ok(hass: HomeAssistant) -> None:
         await asyncio.wait_for(delay_started_flag.wait(), 1)
 
         assert script_obj.is_running
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -788,7 +788,7 @@ async def test_delay_template_complex_ok(hass: HomeAssistant) -> None:
         hass.async_create_task(script_obj.async_run(context=Context()))
         await asyncio.wait_for(delay_started_flag.wait(), 1)
         assert script_obj.is_running
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -855,7 +855,7 @@ async def test_cancel_delay(hass: HomeAssistant) -> None:
 
         assert script_obj.is_running
         assert len(events) == 0
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -904,7 +904,7 @@ async def test_wait_basic(hass: HomeAssistant, action_type) -> None:
 
         assert script_obj.is_running
         assert script_obj.last_action == wait_alias
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -967,7 +967,7 @@ async def test_wait_for_trigger_variables(hass: HomeAssistant) -> None:
         assert script_obj.last_action == wait_alias
         hass.states.async_set("switch.test", "off")
         await hass.async_block_till_done()
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -1004,7 +1004,7 @@ async def test_wait_basic_times_out(hass: HomeAssistant, action_type) -> None:
 
         async with asyncio.timeout(0.1):
             await hass.async_block_till_done()
-    except asyncio.TimeoutError:
+    except TimeoutError:
         timed_out = True
         await script_obj.async_stop()
 
@@ -1067,7 +1067,7 @@ async def test_multiple_runs_wait(hass: HomeAssistant, action_type) -> None:
         hass.async_create_task(script_obj.async_run())
         await asyncio.wait_for(wait_started_flag.wait(), 1)
         await asyncio.sleep(0)
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -1108,7 +1108,7 @@ async def test_cancel_wait(hass: HomeAssistant, action_type) -> None:
 
         assert script_obj.is_running
         assert len(events) == 0
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -1208,7 +1208,7 @@ async def test_wait_timeout(
 
         assert script_obj.is_running
         assert len(events) == 0
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -1276,7 +1276,7 @@ async def test_wait_continue_on_timeout(
 
         assert script_obj.is_running
         assert len(events) == 0
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -1322,7 +1322,7 @@ async def test_wait_template_variables_in(hass: HomeAssistant) -> None:
         await asyncio.wait_for(wait_started_flag.wait(), 1)
 
         assert script_obj.is_running
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -1355,7 +1355,7 @@ async def test_wait_template_with_utcnow(hass: HomeAssistant) -> None:
         match_time = start_time.replace(hour=12)
         with freeze_time(match_time):
             async_fire_time_changed(hass, match_time)
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -1390,7 +1390,7 @@ async def test_wait_template_with_utcnow_no_match(hass: HomeAssistant) -> None:
 
         async with asyncio.timeout(0.1):
             await hass.async_block_till_done()
-    except asyncio.TimeoutError:
+    except TimeoutError:
         timed_out = True
         await script_obj.async_stop()
 
@@ -1446,7 +1446,7 @@ async def test_wait_variables_out(hass: HomeAssistant, mode, action_type) -> Non
 
         assert script_obj.is_running
         assert len(events) == 0
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -2374,7 +2374,7 @@ async def test_repeat_conditional(
         wait_started.clear()
         hass.states.async_set("sensor.test", "done")
         await asyncio.wait_for(hass.async_block_till_done(), 1)
-    except asyncio.TimeoutError:
+    except TimeoutError:
         await script_obj.async_stop()
         raise
 
@@ -3977,7 +3977,7 @@ async def test_script_mode_single(
 
         assert "Already running" in caplog.text
         assert script_obj.is_running
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -4112,7 +4112,7 @@ async def test_script_mode_2(
             )
             for message in messages
         )
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -4207,7 +4207,7 @@ async def test_script_mode_queued(hass: HomeAssistant) -> None:
         assert script_obj.runs == 1
         assert len(events) == 3
         assert events[2].data["value"] == 1
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -4259,7 +4259,7 @@ async def test_script_mode_queued_cancel(hass: HomeAssistant) -> None:
 
         assert not script_obj.is_running
         assert script_obj.runs == 0
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
 
@@ -4320,7 +4320,7 @@ async def test_shutdown_at(
 
         assert script_obj.is_running
         assert script_obj.last_action == delay_alias
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
@@ -4356,7 +4356,7 @@ async def test_shutdown_after(
 
         assert script_obj.is_running
         assert script_obj.last_action == delay_alias
-    except (AssertionError, asyncio.TimeoutError):
+    except (TimeoutError, AssertionError):
         await script_obj.async_stop()
         raise
     else:
