@@ -752,7 +752,7 @@ async def test_get_image_http_error(
     attrs = hass.states.get(ENTITY_ID).attributes
     assert "entity_picture_local" not in attrs
 
-    aioclient_mock.get(url, exc=asyncio.TimeoutError())
+    aioclient_mock.get(url, exc=TimeoutError())
     client = await hass_client_no_auth()
 
     resp = await client.get(attrs["entity_picture"])

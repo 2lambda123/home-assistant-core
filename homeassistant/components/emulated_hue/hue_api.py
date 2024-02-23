@@ -906,7 +906,7 @@ async def wait_for_state_change_or_timeout(
     try:
         async with asyncio.timeout(STATE_CHANGE_WAIT_TIMEOUT):
             await ev.wait()
-    except asyncio.TimeoutError:
+    except TimeoutError:
         pass
     finally:
         unsub()

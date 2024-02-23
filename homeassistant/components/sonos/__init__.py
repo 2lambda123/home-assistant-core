@@ -378,12 +378,7 @@ class SonosDiscoveryManager:
                     sync_get_visible_zones,
                     soco,
                 )
-            except (
-                OSError,
-                SoCoException,
-                Timeout,
-                asyncio.TimeoutError,
-            ) as ex:
+            except (TimeoutError, OSError, SoCoException, Timeout) as ex:
                 if not self.hosts_in_error.get(ip_addr):
                     _LOGGER.warning(
                         "Could not get visible Sonos devices from %s: %s", ip_addr, ex
@@ -432,12 +427,7 @@ class SonosDiscoveryManager:
                         ip_addr,
                         "manual zone scan",
                     )
-                except (
-                    OSError,
-                    SoCoException,
-                    Timeout,
-                    asyncio.TimeoutError,
-                ) as ex:
+                except (TimeoutError, OSError, SoCoException, Timeout) as ex:
                     _LOGGER.warning("Discovery message failed to %s : %s", ip_addr, ex)
             elif not known_speaker.available:
                 try:

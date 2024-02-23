@@ -1,7 +1,6 @@
 """The Netatmo data handler."""
 from __future__ import annotations
 
-import asyncio
 from collections import deque
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -211,7 +210,7 @@ class NetatmoDataHandler:
         except pyatmo.ApiError as err:
             _LOGGER.debug(err)
 
-        except asyncio.TimeoutError as err:
+        except TimeoutError as err:
             _LOGGER.debug(err)
             return
 

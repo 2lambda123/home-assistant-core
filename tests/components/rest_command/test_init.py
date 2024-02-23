@@ -1,5 +1,4 @@
 """The tests for the rest command platform."""
-import asyncio
 from http import HTTPStatus
 from unittest.mock import patch
 
@@ -110,7 +109,7 @@ class TestRestCommandComponent:
         with assert_setup_component(5):
             setup_component(self.hass, rc.DOMAIN, self.config)
 
-        aioclient_mock.get(self.url, exc=asyncio.TimeoutError())
+        aioclient_mock.get(self.url, exc=TimeoutError())
 
         self.hass.services.call(rc.DOMAIN, "get_test", {})
         self.hass.block_till_done()

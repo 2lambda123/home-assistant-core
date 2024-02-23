@@ -22,7 +22,7 @@ from tests.common import MockConfigEntry, async_fire_time_changed
 _LOGGER = logging.getLogger(__name__)
 
 KNOWN_ERRORS: list[tuple[Exception, type[Exception], str]] = [
-    (asyncio.TimeoutError(), asyncio.TimeoutError, "Timeout fetching test data"),
+    (TimeoutError(), asyncio.TimeoutError, "Timeout fetching test data"),
     (
         requests.exceptions.Timeout(),
         requests.exceptions.Timeout,

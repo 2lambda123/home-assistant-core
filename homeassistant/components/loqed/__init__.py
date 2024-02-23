@@ -1,7 +1,6 @@
 """The loqed integration."""
 from __future__ import annotations
 
-import asyncio
 import logging
 import re
 
@@ -39,10 +38,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 r"LOQED-([a-f0-9]+)\.local", r"\1", entry.data["bridge_mdns_hostname"]
             ),
         )
-    except (
-        asyncio.TimeoutError,
-        aiohttp.ClientError,
-    ) as ex:
+    except (TimeoutError, aiohttp.ClientError) as ex:
         raise ConfigEntryNotReady(f"Unable to connect to bridge at {host}") from ex
     coordinator = LoqedDataCoordinator(hass, api, lock, entry)
     await coordinator.ensure_webhooks()

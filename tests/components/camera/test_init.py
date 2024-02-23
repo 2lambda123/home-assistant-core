@@ -670,7 +670,7 @@ async def test_websocket_web_rtc_offer_timeout(
 
     with patch(
         "homeassistant.components.camera.Camera.async_handle_web_rtc_offer",
-        side_effect=asyncio.TimeoutError(),
+        side_effect=TimeoutError(),
     ):
         await client.send_json(
             {

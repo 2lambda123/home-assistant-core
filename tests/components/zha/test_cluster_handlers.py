@@ -844,7 +844,7 @@ async def test_invalid_cluster_handler(hass: HomeAssistant, caplog) -> None:
             zigpy.exceptions.ZigbeeException("Zigbee exception"),
             "Failed to send request: Zigbee exception",
         ),
-        (asyncio.TimeoutError(), "Failed to send request: device did not respond"),
+        (TimeoutError(), "Failed to send request: device did not respond"),
     ],
 )
 async def test_retry_request(

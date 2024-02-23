@@ -881,7 +881,7 @@ async def ws_camera_stream(
     except HomeAssistantError as ex:
         _LOGGER.error("Error requesting stream: %s", ex)
         connection.send_error(msg["id"], "start_stream_failed", str(ex))
-    except asyncio.TimeoutError:
+    except TimeoutError:
         _LOGGER.error("Timeout getting stream source")
         connection.send_error(
             msg["id"], "start_stream_failed", "Timeout getting stream source"
@@ -926,7 +926,7 @@ async def ws_camera_web_rtc_offer(
     except (HomeAssistantError, ValueError) as ex:
         _LOGGER.error("Error handling WebRTC offer: %s", ex)
         connection.send_error(msg["id"], "web_rtc_offer_failed", str(ex))
-    except asyncio.TimeoutError:
+    except TimeoutError:
         _LOGGER.error("Timeout handling WebRTC offer")
         connection.send_error(
             msg["id"], "web_rtc_offer_failed", "Timeout handling WebRTC offer"

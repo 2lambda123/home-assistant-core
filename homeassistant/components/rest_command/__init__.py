@@ -1,5 +1,4 @@
 """Support for exposing regular REST commands as services."""
-import asyncio
 from http import HTTPStatus
 import logging
 
@@ -159,7 +158,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
                             payload,
                         )
 
-            except asyncio.TimeoutError:
+            except TimeoutError:
                 _LOGGER.warning("Timeout call %s", request_url)
 
             except aiohttp.ClientError as err:

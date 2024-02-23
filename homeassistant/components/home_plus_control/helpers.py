@@ -21,6 +21,7 @@ class HomePlusControlOAuth2Implementation(
         authorize_url (str): Authorization URL initiate authentication flow.
         token_url (str): URL to retrieve access/refresh tokens.
         name (str): Name of the implementation (appears in the HomeAssistant GUI).
+
     """
 
     def __init__(
@@ -36,6 +37,7 @@ class HomePlusControlOAuth2Implementation(
             hass (HomeAssistant): HomeAssistant core object.
             config_data (dict): Configuration data that complies with the config Schema
                                 of this component.
+
         """
         super().__init__(
             hass=hass,

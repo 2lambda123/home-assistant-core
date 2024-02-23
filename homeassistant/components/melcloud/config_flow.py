@@ -105,7 +105,7 @@ class FlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 self.hass, self.context["source"], "cannot_connect"
             )
             return self.async_abort(reason="cannot_connect")
-        except (asyncio.TimeoutError, ClientError):
+        except (TimeoutError, ClientError):
             await async_create_import_issue(
                 self.hass, self.context["source"], "cannot_connect"
             )
@@ -192,10 +192,7 @@ class FlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 errors["base"] = "invalid_auth"
             else:
                 errors["base"] = "cannot_connect"
-        except (
-            asyncio.TimeoutError,
-            ClientError,
-        ):
+        except (TimeoutError, ClientError):
             errors["base"] = "cannot_connect"
 
         return acquired_token, errors

@@ -4,7 +4,6 @@ detect_location_info and elevation are mocked by default during tests.
 """
 from __future__ import annotations
 
-import asyncio
 import math
 from typing import Any, NamedTuple
 
@@ -163,7 +162,7 @@ async def _get_whoami(session: aiohttp.ClientSession) -> dict[str, Any] | None:
         resp = await session.get(
             WHOAMI_URL_DEV if HA_VERSION.endswith("0.dev0") else WHOAMI_URL, timeout=30
         )
-    except (aiohttp.ClientError, asyncio.TimeoutError):
+    except (TimeoutError, aiohttp.ClientError):
         return None
 
     try:

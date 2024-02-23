@@ -429,7 +429,7 @@ async def websocket_update_prefs(
         try:
             async with asyncio.timeout(10):
                 await alexa_config.async_get_access_token()
-        except asyncio.TimeoutError:
+        except TimeoutError:
             connection.send_error(
                 msg["id"], "alexa_timeout", "Timeout validating Alexa access token."
             )

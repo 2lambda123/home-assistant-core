@@ -76,7 +76,7 @@ class BlinkCamera(CoordinatorEntity[BlinkUpdateCoordinator], Camera):
         try:
             await self._camera.async_arm(True)
 
-        except asyncio.TimeoutError as er:
+        except TimeoutError as er:
             raise HomeAssistantError("Blink failed to arm camera") from er
 
         self._camera.motion_enabled = True
@@ -86,7 +86,7 @@ class BlinkCamera(CoordinatorEntity[BlinkUpdateCoordinator], Camera):
         """Disable motion detection for the camera."""
         try:
             await self._camera.async_arm(False)
-        except asyncio.TimeoutError as er:
+        except TimeoutError as er:
             raise HomeAssistantError("Blink failed to disarm camera") from er
 
         self._camera.motion_enabled = False

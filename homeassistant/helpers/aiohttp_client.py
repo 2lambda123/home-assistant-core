@@ -187,7 +187,7 @@ async def async_aiohttp_proxy_web(
         # The user cancelled the request
         return None
 
-    except asyncio.TimeoutError as err:
+    except TimeoutError as err:
         # Timeout trying to start the web request
         raise HTTPGatewayTimeout() from err
 

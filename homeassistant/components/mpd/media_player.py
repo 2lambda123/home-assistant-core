@@ -128,22 +128,15 @@ class MpdDevice(MediaPlayerEntity):
                 try:
                     async with asyncio.timeout(self._client.timeout + 5):
                         await self._client.connect(self.server, self.port)
-                except asyncio.TimeoutError as error:
+                except TimeoutError as error:
                     # TimeoutError has no message (which hinders logging further
                     # down the line), so provide one.
-                    raise asyncio.TimeoutError(
-                        "Connection attempt timed out"
-                    ) from error
+                    raise TimeoutError("Connection attempt timed out") from error
                 if self.password is not None:
                     await self._client.password(self.password)
                 self._is_available = True
                 yield
-            except (
-                asyncio.TimeoutError,
-                gaierror,
-                mpd.ConnectionError,
-                OSError,
-            ) as error:
+            except (TimeoutError, gaierror, mpd.ConnectionError, OSError) as error:
                 # Log a warning during startup or when previously connected; for
                 # subsequent errors a debug message is sufficient.
                 log_level = logging.DEBUG

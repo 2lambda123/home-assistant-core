@@ -92,7 +92,7 @@ class NAMFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
             try:
                 config = await async_get_config(self.hass, self.host)
-            except (ApiError, ClientConnectorError, asyncio.TimeoutError):
+            except (TimeoutError, ApiError, ClientConnectorError):
                 errors["base"] = "cannot_connect"
             except CannotGetMacError:
                 return self.async_abort(reason="device_unsupported")
@@ -128,7 +128,7 @@ class NAMFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 await async_check_credentials(self.hass, self.host, user_input)
             except AuthFailedError:
                 errors["base"] = "invalid_auth"
-            except (ApiError, ClientConnectorError, asyncio.TimeoutError):
+            except (TimeoutError, ApiError, ClientConnectorError):
                 errors["base"] = "cannot_connect"
             except Exception:  # pylint: disable=broad-except
                 _LOGGER.exception("Unexpected exception")
@@ -155,7 +155,7 @@ class NAMFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
 
         try:
             self._config = await async_get_config(self.hass, self.host)
-        except (ApiError, ClientConnectorError, asyncio.TimeoutError):
+        except (TimeoutError, ApiError, ClientConnectorError):
             return self.async_abort(reason="cannot_connect")
         except CannotGetMacError:
             return self.async_abort(reason="device_unsupported")
@@ -205,12 +205,7 @@ class NAMFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             try:
                 await async_check_credentials(self.hass, self.host, user_input)
-            except (
-                ApiError,
-                AuthFailedError,
-                ClientConnectorError,
-                asyncio.TimeoutError,
-            ):
+            except (TimeoutError, ApiError, AuthFailedError, ClientConnectorError):
                 return self.async_abort(reason="reauth_unsuccessful")
 
             self.hass.config_entries.async_update_entry(

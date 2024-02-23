@@ -21,6 +21,7 @@ def add_switch_entities(new_unique_ids, coordinator, add_entities):
         new_unique_ids (set): Unique identifiers of entities to be added to Home Assistant.
         coordinator (DataUpdateCoordinator): Data coordinator of this platform.
         add_entities (function): Method called to add entities to Home Assistant.
+
     """
     new_entities = []
     for uid in new_unique_ids:
@@ -40,6 +41,7 @@ async def async_setup_entry(
         hass (HomeAssistant): HomeAssistant core object.
         config_entry (ConfigEntry): ConfigEntry object that configures this platform.
         async_add_entities (function): Function called to add entities of this platform.
+
     """
     partial_add_switch_entities = partial(
         add_switch_entities, add_entities=async_add_entities
