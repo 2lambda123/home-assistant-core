@@ -1,4 +1,5 @@
 """Constants for the Motion Blinds component."""
+
 from homeassistant.const import Platform
 
 DOMAIN = "motion_blinds"

@@ -1,4 +1,5 @@
 """Support for Duotecno climate devices."""
+
 from typing import Any, Final
 
 from duotecno.unit import SensUnit

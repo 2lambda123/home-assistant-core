@@ -1,4 +1,5 @@
 """Support for a ScreenLogic number entity."""
+
 import asyncio
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass

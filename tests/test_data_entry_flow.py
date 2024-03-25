@@ -1,4 +1,5 @@
 """Test the flow classes."""
+
 import dataclasses
 import logging
 from unittest.mock import Mock, patch
@@ -524,8 +525,9 @@ async def test_abort_flow_exception(manager) -> None:
 async def test_init_unknown_flow(manager) -> None:
     """Test that UnknownFlow is raised when async_create_flow returns None."""
 
-    with pytest.raises(data_entry_flow.UnknownFlow), patch.object(
-        manager, "async_create_flow", return_value=None
+    with (
+        pytest.raises(data_entry_flow.UnknownFlow),
+        patch.object(manager, "async_create_flow", return_value=None),
     ):
         await manager.async_init("test")
 

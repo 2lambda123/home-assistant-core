@@ -1,4 +1,5 @@
 """Support to manage a shopping list."""
+
 from collections.abc import Callable
 from http import HTTPStatus
 import logging

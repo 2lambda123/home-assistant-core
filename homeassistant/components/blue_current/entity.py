@@ -1,4 +1,5 @@
 """Entity representing a Blue Current charge point."""
+
 from homeassistant.const import ATTR_NAME
 from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceInfo

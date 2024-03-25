@@ -1,4 +1,5 @@
 """Test deCONZ gateway."""
+
 import asyncio
 from copy import deepcopy
 from unittest.mock import patch
@@ -307,8 +308,11 @@ async def test_get_deconz_session_fails(
     hass: HomeAssistant, side_effect, raised_exception
 ) -> None:
     """Failed call."""
-    with patch(
-        "pydeconz.DeconzSession.refresh_state",
-        side_effect=side_effect,
-    ), pytest.raises(raised_exception):
+    with (
+        patch(
+            "pydeconz.DeconzSession.refresh_state",
+            side_effect=side_effect,
+        ),
+        pytest.raises(raised_exception),
+    ):
         assert await get_deconz_session(hass, ENTRY_CONFIG)

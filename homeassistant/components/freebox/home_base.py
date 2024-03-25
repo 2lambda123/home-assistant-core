@@ -1,4 +1,5 @@
 """Support for Freebox base features."""
+
 from __future__ import annotations
 
 import logging

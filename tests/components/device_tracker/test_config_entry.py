@@ -1,4 +1,5 @@
 """Test Device Tracker config entry things."""
+
 from homeassistant.components.device_tracker import DOMAIN, config_entry as ce
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import device_registry as dr, entity_registry as er

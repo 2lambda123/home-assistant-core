@@ -1,4 +1,5 @@
 """Arcam media player."""
+
 from __future__ import annotations
 
 import functools

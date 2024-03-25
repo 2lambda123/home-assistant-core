@@ -1,4 +1,5 @@
 """Base class Harmony entities."""
+
 import logging
 
 from homeassistant.helpers.entity import Entity

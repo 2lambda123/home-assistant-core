@@ -1,4 +1,5 @@
 """Common tradfri test fixtures."""
+
 from __future__ import annotations
 
 from collections.abc import Generator
@@ -60,8 +61,9 @@ def mock_gateway_fixture():
         mock_groups=[],
         mock_responses=[],
     )
-    with patch(f"{TRADFRI_PATH}.Gateway", return_value=gateway), patch(
-        f"{TRADFRI_PATH}.config_flow.Gateway", return_value=gateway
+    with (
+        patch(f"{TRADFRI_PATH}.Gateway", return_value=gateway),
+        patch(f"{TRADFRI_PATH}.config_flow.Gateway", return_value=gateway),
     ):
         yield gateway
 

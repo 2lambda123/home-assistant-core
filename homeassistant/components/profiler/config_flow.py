@@ -1,4 +1,5 @@
 """Config flow for Profiler integration."""
+
 from homeassistant import config_entries
 
 from .const import DEFAULT_NAME, DOMAIN

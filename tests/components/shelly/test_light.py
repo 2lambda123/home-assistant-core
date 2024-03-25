@@ -1,4 +1,5 @@
 """Tests for Shelly light platform."""
+
 from aioshelly.const import (
     MODEL_BULB,
     MODEL_BULB_RGBW,

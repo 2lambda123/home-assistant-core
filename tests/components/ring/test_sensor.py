@@ -1,4 +1,5 @@
 """The tests for the Ring sensor platform."""
+
 import requests_mock
 
 from homeassistant.core import HomeAssistant

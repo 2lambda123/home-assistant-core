@@ -1,4 +1,5 @@
 """Test check_config script."""
+
 from unittest.mock import patch
 
 import pytest

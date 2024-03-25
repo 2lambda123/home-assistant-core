@@ -1,4 +1,5 @@
 """Consume the august activity stream."""
+
 import asyncio
 from datetime import datetime
 from functools import partial

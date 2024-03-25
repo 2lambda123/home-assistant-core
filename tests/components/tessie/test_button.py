@@ -1,4 +1,5 @@
 """Test the Tessie button platform."""
+
 from unittest.mock import patch
 
 from homeassistant.components.button import DOMAIN as BUTTON_DOMAIN, SERVICE_PRESS

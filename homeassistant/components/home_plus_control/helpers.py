@@ -1,4 +1,5 @@
 """Helper classes and functions for the Legrand Home+ Control integration."""
+
 from homeassistant.const import CONF_CLIENT_ID, CONF_CLIENT_SECRET
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_entry_oauth2_flow

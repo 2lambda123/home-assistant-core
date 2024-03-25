@@ -1,4 +1,5 @@
 """The Apple TV integration."""
+
 import asyncio
 import logging
 from random import randrange

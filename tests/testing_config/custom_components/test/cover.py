@@ -2,6 +2,7 @@
 
 Call init before using it in your tests to ensure clean test data.
 """
+
 from homeassistant.components.cover import CoverEntity, CoverEntityFeature
 from homeassistant.const import STATE_CLOSED, STATE_CLOSING, STATE_OPEN, STATE_OPENING
 

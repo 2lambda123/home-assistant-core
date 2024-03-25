@@ -1,4 +1,5 @@
 """Tests for Shelly binary sensor platform."""
+
 from aioshelly.const import MODEL_MOTION
 from freezegun.api import FrozenDateTimeFactory
 

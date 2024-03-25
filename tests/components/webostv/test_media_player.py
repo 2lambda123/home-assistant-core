@@ -1,4 +1,5 @@
 """The tests for the LG webOS media player platform."""
+
 import asyncio
 from datetime import timedelta
 from http import HTTPStatus

@@ -1,4 +1,5 @@
 """Test the Legrand Home+ Control integration."""
+
 from unittest.mock import patch
 
 from homeassistant import config_entries, setup

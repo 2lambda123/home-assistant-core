@@ -1,4 +1,5 @@
 """Handle the auth of a connection."""
+
 from __future__ import annotations
 
 from collections.abc import Callable
@@ -86,10 +87,10 @@ class AuthPhase:
             )
         ):
             conn = await self._async_finish_auth(refresh_token.user, refresh_token)
-            conn.subscriptions[
-                "auth"
-            ] = self._hass.auth.async_register_revoke_token_callback(
-                refresh_token.id, self._cancel_ws
+            conn.subscriptions["auth"] = (
+                self._hass.auth.async_register_revoke_token_callback(
+                    refresh_token.id, self._cancel_ws
+                )
             )
 
             return conn

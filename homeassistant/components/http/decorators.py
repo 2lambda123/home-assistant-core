@@ -1,4 +1,5 @@
 """Decorators for the Home Assistant API."""
+
 from __future__ import annotations
 
 from collections.abc import Callable, Coroutine
@@ -23,15 +24,15 @@ def require_admin(
     _func: None = None,
     *,
     error: Unauthorized | None = None,
-) -> Callable[[_FuncType[_HomeAssistantViewT, _P]], _FuncType[_HomeAssistantViewT, _P]]:
-    ...
+) -> Callable[
+    [_FuncType[_HomeAssistantViewT, _P]], _FuncType[_HomeAssistantViewT, _P]
+]: ...
 
 
 @overload
 def require_admin(
     _func: _FuncType[_HomeAssistantViewT, _P],
-) -> _FuncType[_HomeAssistantViewT, _P]:
-    ...
+) -> _FuncType[_HomeAssistantViewT, _P]: ...
 
 
 def require_admin(

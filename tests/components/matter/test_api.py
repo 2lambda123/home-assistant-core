@@ -1,4 +1,5 @@
 """Test the api module."""
+
 from unittest.mock import MagicMock, call
 
 from matter_server.common.errors import InvalidCommand, NodeCommissionFailed

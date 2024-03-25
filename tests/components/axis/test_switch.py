@@ -1,4 +1,5 @@
 """Axis switch platform tests."""
+
 from unittest.mock import AsyncMock
 
 import pytest

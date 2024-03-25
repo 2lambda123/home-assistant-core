@@ -1,4 +1,5 @@
 """Test ESPHome dashboard features."""
+
 import asyncio
 from unittest.mock import patch
 
@@ -79,11 +80,16 @@ async def test_setup_dashboard_fails_when_already_setup(
     await hass.config_entries.async_setup(mock_config_entry.entry_id)
     await hass.async_block_till_done()
 
-    with patch.object(
-        dashboard.ESPHomeDashboardAPI, "get_devices", side_effect=asyncio.TimeoutError
-    ) as mock_get_devices, patch(
-        "homeassistant.components.esphome.async_setup_entry", return_value=True
-    ) as mock_setup:
+    with (
+        patch.object(
+            dashboard.ESPHomeDashboardAPI,
+            "get_devices",
+            side_effect=asyncio.TimeoutError,
+        ) as mock_get_devices,
+        patch(
+            "homeassistant.components.esphome.async_setup_entry", return_value=True
+        ) as mock_setup,
+    ):
         await dashboard.async_set_dashboard_info(hass, "test-slug", "test-host", 6052)
         await hass.async_block_till_done()
 
@@ -147,12 +153,15 @@ async def test_new_dashboard_fix_reauth(
 
     await dashboard.async_get_dashboard(hass).async_refresh()
 
-    with patch(
-        "homeassistant.components.esphome.dashboard.ESPHomeDashboardAPI.get_encryption_key",
-        return_value=VALID_NOISE_PSK,
-    ) as mock_get_encryption_key, patch(
-        "homeassistant.components.esphome.async_setup_entry", return_value=True
-    ) as mock_setup:
+    with (
+        patch(
+            "homeassistant.components.esphome.dashboard.ESPHomeDashboardAPI.get_encryption_key",
+            return_value=VALID_NOISE_PSK,
+        ) as mock_get_encryption_key,
+        patch(
+            "homeassistant.components.esphome.async_setup_entry", return_value=True
+        ) as mock_setup,
+    ):
         await dashboard.async_set_dashboard_info(hass, "test-slug", "test-host", 6052)
         await hass.async_block_till_done()
 

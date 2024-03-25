@@ -1,4 +1,5 @@
 """Constants used by multiple MQTT modules."""
+
 from homeassistant.const import CONF_PAYLOAD, Platform
 
 ATTR_DISCOVERY_HASH = "discovery_hash"

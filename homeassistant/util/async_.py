@@ -1,4 +1,5 @@
 """Asyncio utilities."""
+
 from __future__ import annotations
 
 from asyncio import Future, Semaphore, gather, get_running_loop

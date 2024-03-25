@@ -1,6 +1,5 @@
 """Base class for August entity."""
 
-
 from abc import abstractmethod
 from datetime import datetime, timedelta
 

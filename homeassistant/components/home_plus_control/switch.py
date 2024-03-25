@@ -1,4 +1,5 @@
 """Legrand Home+ Control Switch Entity Module that uses the HomeAssistant DataUpdateCoordinator."""
+
 from functools import partial
 from typing import Any
 

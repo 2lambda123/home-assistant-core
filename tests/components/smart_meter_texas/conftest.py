@@ -1,4 +1,5 @@
 """Test configuration and mocks for Smart Meter Texas."""
+
 import asyncio
 from http import HTTPStatus
 import json

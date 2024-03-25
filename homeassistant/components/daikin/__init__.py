@@ -1,4 +1,5 @@
 """Platform for the Daikin AC."""
+
 import asyncio
 from datetime import timedelta
 import logging

@@ -1,4 +1,5 @@
 """Support for Traccar."""
+
 from http import HTTPStatus
 
 from aiohttp import web

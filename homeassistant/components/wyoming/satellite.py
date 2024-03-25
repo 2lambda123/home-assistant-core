@@ -1,4 +1,5 @@
 """Support for Wyoming satellite services."""
+
 import asyncio
 from collections.abc import AsyncGenerator
 import io

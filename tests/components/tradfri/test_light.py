@@ -1,4 +1,5 @@
 """Tradfri lights platform tests."""
+
 from copy import deepcopy
 from unittest.mock import MagicMock, Mock, PropertyMock, patch
 

@@ -1,4 +1,5 @@
 """The tests for Netgear LTE sensor platform."""
+
 import pytest
 
 from homeassistant.components.sensor import SensorDeviceClass

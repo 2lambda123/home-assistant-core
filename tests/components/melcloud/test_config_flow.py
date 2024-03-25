@@ -1,4 +1,5 @@
 """Test the MELCloud config flow."""
+
 from http import HTTPStatus
 from unittest.mock import patch
 
@@ -55,11 +56,14 @@ async def test_form(hass: HomeAssistant, mock_login, mock_get_devices) -> None:
     assert result["type"] == "form"
     assert result["errors"] is None
 
-    with patch(
-        "homeassistant.components.melcloud.async_setup", return_value=True
-    ) as mock_setup, patch(
-        "homeassistant.components.melcloud.async_setup_entry", return_value=True
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.melcloud.async_setup", return_value=True
+        ) as mock_setup,
+        patch(
+            "homeassistant.components.melcloud.async_setup_entry", return_value=True
+        ) as mock_setup_entry,
+    ):
         result2 = await hass.config_entries.flow.async_configure(
             result["flow_id"],
             {"username": "test-email@test-domain.com", "password": "test-password"},
@@ -225,11 +229,14 @@ async def test_import_with_token(
     hass: HomeAssistant, mock_login, mock_get_devices
 ) -> None:
     """Test successful import."""
-    with patch(
-        "homeassistant.components.melcloud.async_setup", return_value=True
-    ) as mock_setup, patch(
-        "homeassistant.components.melcloud.async_setup_entry", return_value=True
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.melcloud.async_setup", return_value=True
+        ) as mock_setup,
+        patch(
+            "homeassistant.components.melcloud.async_setup_entry", return_value=True
+        ) as mock_setup_entry,
+    ):
         result = await hass.config_entries.flow.async_init(
             DOMAIN,
             context={"source": config_entries.SOURCE_IMPORT},
@@ -262,11 +269,14 @@ async def test_token_refresh(hass: HomeAssistant, mock_login, mock_get_devices) 
     )
     mock_entry.add_to_hass(hass)
 
-    with patch(
-        "homeassistant.components.melcloud.async_setup", return_value=True
-    ) as mock_setup, patch(
-        "homeassistant.components.melcloud.async_setup_entry", return_value=True
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.melcloud.async_setup", return_value=True
+        ) as mock_setup,
+        patch(
+            "homeassistant.components.melcloud.async_setup_entry", return_value=True
+        ) as mock_setup_entry,
+    ):
         result = await hass.config_entries.flow.async_init(
             DOMAIN,
             context={"source": config_entries.SOURCE_USER},

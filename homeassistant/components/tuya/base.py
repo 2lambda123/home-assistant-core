@@ -1,4 +1,5 @@
 """Tuya Home Assistant Base Device Model."""
+
 from __future__ import annotations
 
 import base64
@@ -163,8 +164,7 @@ class TuyaEntity(Entity):
         *,
         prefer_function: bool = False,
         dptype: Literal[DPType.ENUM],
-    ) -> EnumTypeData | None:
-        ...
+    ) -> EnumTypeData | None: ...
 
     @overload
     def find_dpcode(
@@ -173,8 +173,7 @@ class TuyaEntity(Entity):
         *,
         prefer_function: bool = False,
         dptype: Literal[DPType.INTEGER],
-    ) -> IntegerTypeData | None:
-        ...
+    ) -> IntegerTypeData | None: ...
 
     @overload
     def find_dpcode(
@@ -182,8 +181,7 @@ class TuyaEntity(Entity):
         dpcodes: str | DPCode | tuple[DPCode, ...] | None,
         *,
         prefer_function: bool = False,
-    ) -> DPCode | None:
-        ...
+    ) -> DPCode | None: ...
 
     def find_dpcode(
         self,

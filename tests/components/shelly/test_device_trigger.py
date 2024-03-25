@@ -1,4 +1,5 @@
 """The tests for Shelly device triggers."""
+
 from aioshelly.const import MODEL_BUTTON1
 import pytest
 from pytest_unordered import unordered

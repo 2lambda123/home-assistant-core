@@ -1,4 +1,5 @@
 """Tests for the geo_json_events component."""
+
 from unittest.mock import MagicMock
 
 

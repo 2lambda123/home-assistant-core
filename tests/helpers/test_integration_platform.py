@@ -1,4 +1,5 @@
 """Test integration platform helpers."""
+
 from unittest.mock import Mock
 
 import pytest

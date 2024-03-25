@@ -1,4 +1,5 @@
 """Tests for async util methods from Python source."""
+
 import asyncio
 import time
 from unittest.mock import MagicMock, Mock, patch
@@ -47,25 +48,28 @@ async def test_check_loop_async() -> None:
 
 async def test_check_loop_async_integration(caplog: pytest.LogCaptureFixture) -> None:
     """Test check_loop detects and raises when called from event loop from integration context."""
-    with pytest.raises(RuntimeError), patch(
-        "homeassistant.helpers.frame.extract_stack",
-        return_value=[
-            Mock(
-                filename="/home/paulus/homeassistant/core.py",
-                lineno="23",
-                line="do_something()",
-            ),
-            Mock(
-                filename="/home/paulus/homeassistant/components/hue/light.py",
-                lineno="23",
-                line="self.light.is_on",
-            ),
-            Mock(
-                filename="/home/paulus/aiohue/lights.py",
-                lineno="2",
-                line="something()",
-            ),
-        ],
+    with (
+        pytest.raises(RuntimeError),
+        patch(
+            "homeassistant.helpers.frame.extract_stack",
+            return_value=[
+                Mock(
+                    filename="/home/paulus/homeassistant/core.py",
+                    lineno="23",
+                    line="do_something()",
+                ),
+                Mock(
+                    filename="/home/paulus/homeassistant/components/hue/light.py",
+                    lineno="23",
+                    line="self.light.is_on",
+                ),
+                Mock(
+                    filename="/home/paulus/aiohue/lights.py",
+                    lineno="2",
+                    line="something()",
+                ),
+            ],
+        ),
     ):
         hasync.check_loop(banned_function)
     assert (
@@ -111,25 +115,28 @@ async def test_check_loop_async_integration_non_strict(
 
 async def test_check_loop_async_custom(caplog: pytest.LogCaptureFixture) -> None:
     """Test check_loop detects when called from event loop with custom component context."""
-    with pytest.raises(RuntimeError), patch(
-        "homeassistant.helpers.frame.extract_stack",
-        return_value=[
-            Mock(
-                filename="/home/paulus/homeassistant/core.py",
-                lineno="23",
-                line="do_something()",
-            ),
-            Mock(
-                filename="/home/paulus/config/custom_components/hue/light.py",
-                lineno="23",
-                line="self.light.is_on",
-            ),
-            Mock(
-                filename="/home/paulus/aiohue/lights.py",
-                lineno="2",
-                line="something()",
-            ),
-        ],
+    with (
+        pytest.raises(RuntimeError),
+        patch(
+            "homeassistant.helpers.frame.extract_stack",
+            return_value=[
+                Mock(
+                    filename="/home/paulus/homeassistant/core.py",
+                    lineno="23",
+                    line="do_something()",
+                ),
+                Mock(
+                    filename="/home/paulus/config/custom_components/hue/light.py",
+                    lineno="23",
+                    line="self.light.is_on",
+                ),
+                Mock(
+                    filename="/home/paulus/aiohue/lights.py",
+                    lineno="2",
+                    line="something()",
+                ),
+            ],
+        ),
     ):
         hasync.check_loop(banned_function)
     assert (
@@ -240,9 +247,10 @@ async def test_callback_is_always_scheduled(hass: HomeAssistant) -> None:
     callback = MagicMock()
     hasync.shutdown_run_callback_threadsafe(hass.loop)
 
-    with patch.object(
-        hass.loop, "call_soon_threadsafe"
-    ) as mock_call_soon_threadsafe, pytest.raises(RuntimeError):
+    with (
+        patch.object(hass.loop, "call_soon_threadsafe") as mock_call_soon_threadsafe,
+        pytest.raises(RuntimeError),
+    ):
         hasync.run_callback_threadsafe(hass.loop, callback)
 
     mock_call_soon_threadsafe.assert_called_once()

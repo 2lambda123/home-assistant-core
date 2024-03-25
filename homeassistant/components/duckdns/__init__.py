@@ -1,4 +1,5 @@
 """Integrate with DuckDNS."""
+
 from collections.abc import Callable, Coroutine
 from datetime import datetime, timedelta
 import logging

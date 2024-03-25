@@ -1,4 +1,5 @@
 """Tests for Vodafone Station config flow."""
+
 from unittest.mock import patch
 
 from aiovodafone import exceptions as aiovodafone_exceptions
@@ -17,15 +18,20 @@ from tests.common import MockConfigEntry
 
 async def test_user(hass: HomeAssistant) -> None:
     """Test starting a flow by user."""
-    with patch(
-        "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
-    ), patch(
-        "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
-    ), patch(
-        "homeassistant.components.vodafone_station.async_setup_entry"
-    ) as mock_setup_entry, patch(
-        "requests.get",
-    ) as mock_request_get:
+    with (
+        patch(
+            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
+        ),
+        patch(
+            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
+        ),
+        patch(
+            "homeassistant.components.vodafone_station.async_setup_entry"
+        ) as mock_setup_entry,
+        patch(
+            "requests.get",
+        ) as mock_request_get,
+    ):
         mock_request_get.return_value.status_code = 200
 
         result = await hass.config_entries.flow.async_init(
@@ -79,18 +85,23 @@ async def test_exception_connection(hass: HomeAssistant, side_effect, error) -> 
         assert result["errors"]["base"] == error
 
         # Should be recoverable after hits error
-        with patch(
-            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.get_devices_data",
-            return_value={
-                "wifi_user": "on|laptop|device-1|xx:xx:xx:xx:xx:xx|192.168.100.1||2.4G",
-                "ethernet": "laptop|device-2|yy:yy:yy:yy:yy:yy|192.168.100.2|;",
-            },
-        ), patch(
-            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
-        ), patch(
-            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
-        ), patch(
-            "homeassistant.components.vodafone_station.async_setup_entry",
+        with (
+            patch(
+                "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.get_devices_data",
+                return_value={
+                    "wifi_user": "on|laptop|device-1|xx:xx:xx:xx:xx:xx|192.168.100.1||2.4G",
+                    "ethernet": "laptop|device-2|yy:yy:yy:yy:yy:yy|192.168.100.2|;",
+                },
+            ),
+            patch(
+                "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
+            ),
+            patch(
+                "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
+            ),
+            patch(
+                "homeassistant.components.vodafone_station.async_setup_entry",
+            ),
         ):
             result2 = await hass.config_entries.flow.async_configure(
                 result["flow_id"],
@@ -117,15 +128,20 @@ async def test_reauth_successful(hass: HomeAssistant) -> None:
     mock_config = MockConfigEntry(domain=DOMAIN, data=MOCK_USER_DATA)
     mock_config.add_to_hass(hass)
 
-    with patch(
-        "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
-    ), patch(
-        "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
-    ), patch(
-        "homeassistant.components.vodafone_station.async_setup_entry",
-    ), patch(
-        "requests.get",
-    ) as mock_request_get:
+    with (
+        patch(
+            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
+        ),
+        patch(
+            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
+        ),
+        patch(
+            "homeassistant.components.vodafone_station.async_setup_entry",
+        ),
+        patch(
+            "requests.get",
+        ) as mock_request_get,
+    ):
         mock_request_get.return_value.status_code = 200
 
         result = await hass.config_entries.flow.async_init(
@@ -164,13 +180,17 @@ async def test_reauth_not_successful(hass: HomeAssistant, side_effect, error) ->
     mock_config = MockConfigEntry(domain=DOMAIN, data=MOCK_USER_DATA)
     mock_config.add_to_hass(hass)
 
-    with patch(
-        "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
-        side_effect=side_effect,
-    ), patch(
-        "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
-    ), patch(
-        "homeassistant.components.vodafone_station.async_setup_entry",
+    with (
+        patch(
+            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
+            side_effect=side_effect,
+        ),
+        patch(
+            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
+        ),
+        patch(
+            "homeassistant.components.vodafone_station.async_setup_entry",
+        ),
     ):
         result = await hass.config_entries.flow.async_init(
             DOMAIN,
@@ -193,18 +213,23 @@ async def test_reauth_not_successful(hass: HomeAssistant, side_effect, error) ->
         assert result["errors"]["base"] == error
 
         # Should be recoverable after hits error
-        with patch(
-            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.get_devices_data",
-            return_value={
-                "wifi_user": "on|laptop|device-1|xx:xx:xx:xx:xx:xx|192.168.100.1||2.4G",
-                "ethernet": "laptop|device-2|yy:yy:yy:yy:yy:yy|192.168.100.2|;",
-            },
-        ), patch(
-            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
-        ), patch(
-            "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
-        ), patch(
-            "homeassistant.components.vodafone_station.async_setup_entry",
+        with (
+            patch(
+                "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.get_devices_data",
+                return_value={
+                    "wifi_user": "on|laptop|device-1|xx:xx:xx:xx:xx:xx|192.168.100.1||2.4G",
+                    "ethernet": "laptop|device-2|yy:yy:yy:yy:yy:yy|192.168.100.2|;",
+                },
+            ),
+            patch(
+                "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.login",
+            ),
+            patch(
+                "homeassistant.components.vodafone_station.config_flow.VodafoneStationSercommApi.logout",
+            ),
+            patch(
+                "homeassistant.components.vodafone_station.async_setup_entry",
+            ),
         ):
             result2 = await hass.config_entries.flow.async_configure(
                 result["flow_id"],

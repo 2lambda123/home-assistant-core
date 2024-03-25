@@ -1,4 +1,5 @@
 """Tests for the system health component init."""
+
 import asyncio
 from unittest.mock import AsyncMock, Mock, patch
 

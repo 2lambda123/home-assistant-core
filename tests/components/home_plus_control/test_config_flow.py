@@ -1,4 +1,5 @@
 """Test the Legrand Home+ Control config flow."""
+
 from http import HTTPStatus
 from unittest.mock import patch
 

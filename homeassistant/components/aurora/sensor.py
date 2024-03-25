@@ -1,4 +1,5 @@
 """Support for Aurora Forecast sensor."""
+
 from homeassistant.components.sensor import SensorEntity, SensorStateClass
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import PERCENTAGE

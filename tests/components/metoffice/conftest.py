@@ -1,4 +1,5 @@
 """Fixtures for Met Office weather integration tests."""
+
 import sys
 from unittest.mock import patch
 

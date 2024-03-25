@@ -1,4 +1,5 @@
 """Helper functions for the CO2 Signal integration."""
+
 from collections.abc import Mapping
 from typing import Any
 

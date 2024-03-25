@@ -1,4 +1,5 @@
 """The tests for Netatmo cover."""
+
 from unittest.mock import patch
 
 from homeassistant.components.cover import (

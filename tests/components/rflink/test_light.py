@@ -4,6 +4,7 @@ Test setup of RFLink lights component/platform. State tracking and
 control of RFLink switch devices.
 
 """
+
 import asyncio
 
 from homeassistant.components.light import ATTR_BRIGHTNESS
