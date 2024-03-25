@@ -1,4 +1,5 @@
 """Config flow for Minecraft Server integration."""
+
 import logging
 
 import voluptuous as vol

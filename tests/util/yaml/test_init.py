@@ -1,4 +1,5 @@
 """Test Home Assistant yaml loader."""
+
 from collections.abc import Generator
 import importlib
 import io
@@ -516,9 +517,9 @@ class TestSecrets(unittest.TestCase):
 
     def test_secrets_are_not_dict(self):
         """Did secrets handle non-dict file."""
-        FILES[
-            self._secret_path
-        ] = "- http_pw: pwhttp\n  comp1_un: un1\n  comp1_pw: pw1\n"
+        FILES[self._secret_path] = (
+            "- http_pw: pwhttp\n  comp1_un: un1\n  comp1_pw: pw1\n"
+        )
         with pytest.raises(HomeAssistantError):
             load_yaml(
                 self._yaml_path,
@@ -647,8 +648,9 @@ async def test_deprecated_loaders(
     message: str,
 ) -> None:
     """Test instantiating the deprecated yaml loaders logs a warning."""
-    with pytest.raises(TypeError), patch(
-        "homeassistant.helpers.frame._REPORTED_INTEGRATIONS", set()
+    with (
+        pytest.raises(TypeError),
+        patch("homeassistant.helpers.frame._REPORTED_INTEGRATIONS", set()),
     ):
         loader_class()
     assert (f"Detected that integration 'hue' uses deprecated {message}") in caplog.text

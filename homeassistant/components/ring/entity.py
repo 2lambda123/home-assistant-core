@@ -1,4 +1,5 @@
 """Base class for Ring entity."""
+
 from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity import Entity

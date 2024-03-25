@@ -1,4 +1,5 @@
 """Tests for the Cast integration helpers."""
+
 import asyncio
 
 from aiohttp import client_exceptions

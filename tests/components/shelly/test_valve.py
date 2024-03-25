@@ -1,4 +1,5 @@
 """Tests for Shelly valve platform."""
+
 from aioshelly.const import MODEL_GAS
 
 from homeassistant.components.valve import DOMAIN as VALVE_DOMAIN

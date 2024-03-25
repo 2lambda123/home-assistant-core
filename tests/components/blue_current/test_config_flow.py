@@ -1,4 +1,5 @@
 """Test the Blue Current config flow."""
+
 from unittest.mock import patch
 
 import pytest
@@ -30,11 +31,13 @@ async def test_user(hass: HomeAssistant) -> None:
     )
     assert result["errors"] == {}
 
-    with patch("bluecurrent_api.Client.validate_api_token", return_value=True), patch(
-        "bluecurrent_api.Client.get_email", return_value="test@email.com"
-    ), patch(
-        "homeassistant.components.blue_current.async_setup_entry",
-        return_value=True,
+    with (
+        patch("bluecurrent_api.Client.validate_api_token", return_value=True),
+        patch("bluecurrent_api.Client.get_email", return_value="test@email.com"),
+        patch(
+            "homeassistant.components.blue_current.async_setup_entry",
+            return_value=True,
+        ),
     ):
         result2 = await hass.config_entries.flow.async_configure(
             result["flow_id"],
@@ -71,11 +74,13 @@ async def test_flow_fails(hass: HomeAssistant, error: Exception, message: str) -
         )
         assert result["errors"]["base"] == message
 
-    with patch("bluecurrent_api.Client.validate_api_token", return_value=True), patch(
-        "bluecurrent_api.Client.get_email", return_value="test@email.com"
-    ), patch(
-        "homeassistant.components.blue_current.async_setup_entry",
-        return_value=True,
+    with (
+        patch("bluecurrent_api.Client.validate_api_token", return_value=True),
+        patch("bluecurrent_api.Client.get_email", return_value="test@email.com"),
+        patch(
+            "homeassistant.components.blue_current.async_setup_entry",
+            return_value=True,
+        ),
     ):
         result2 = await hass.config_entries.flow.async_configure(
             result["flow_id"],

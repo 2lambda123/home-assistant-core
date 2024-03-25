@@ -1,4 +1,5 @@
 """Offer Z-Wave JS event listening automation trigger."""
+
 from __future__ import annotations
 
 from collections.abc import Callable
@@ -196,9 +197,9 @@ async def async_attach_trigger(
         else:
             payload["description"] = primary_desc
 
-        payload[
-            "description"
-        ] = f"{payload['description']} with event data: {event_data}"
+        payload["description"] = (
+            f"{payload['description']} with event data: {event_data}"
+        )
 
         hass.async_run_hass_job(job, {"trigger": payload})
 

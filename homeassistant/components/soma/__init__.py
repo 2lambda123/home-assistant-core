@@ -1,4 +1,5 @@
 """Support for Soma Smartshades."""
+
 import logging
 
 from api.soma_api import SomaApi

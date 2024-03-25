@@ -1,4 +1,5 @@
 """Support for Asterisk Voicemail interface."""
+
 import logging
 
 from asterisk_mbox import Client as asteriskClient

@@ -1,4 +1,5 @@
 """Provide configuration end points for Automations."""
+
 import uuid
 
 from homeassistant.components.automation.config import (

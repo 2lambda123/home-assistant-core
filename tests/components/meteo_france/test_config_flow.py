@@ -1,4 +1,5 @@
 """Tests for the Meteo-France config flow."""
+
 from unittest.mock import patch
 
 from meteofrance_api.model import Place
@@ -79,12 +80,15 @@ def mock_controller_client_single():
 @pytest.fixture(autouse=True)
 def mock_setup():
     """Prevent setup."""
-    with patch(
-        "homeassistant.components.meteo_france.async_setup",
-        return_value=True,
-    ), patch(
-        "homeassistant.components.meteo_france.async_setup_entry",
-        return_value=True,
+    with (
+        patch(
+            "homeassistant.components.meteo_france.async_setup",
+            return_value=True,
+        ),
+        patch(
+            "homeassistant.components.meteo_france.async_setup_entry",
+            return_value=True,
+        ),
     ):
         yield
 

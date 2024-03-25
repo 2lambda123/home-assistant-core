@@ -1,4 +1,5 @@
 """ESPHome voice assistant support."""
+
 from __future__ import annotations
 
 import asyncio

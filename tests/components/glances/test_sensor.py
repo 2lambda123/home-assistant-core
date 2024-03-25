@@ -1,4 +1,5 @@
 """Tests for glances sensors."""
+
 import pytest
 
 from homeassistant.components.glances.const import DOMAIN

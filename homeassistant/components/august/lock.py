@@ -1,4 +1,5 @@
 """Support for August lock."""
+
 import logging
 from typing import Any
 
@@ -135,9 +136,9 @@ class AugustLock(AugustEntityMixin, RestoreEntity, LockEntity):
             ATTR_BATTERY_LEVEL: self._detail.battery_level
         }
         if self._detail.keypad is not None:
-            self._attr_extra_state_attributes[
-                "keypad_battery_level"
-            ] = self._detail.keypad.battery_level
+            self._attr_extra_state_attributes["keypad_battery_level"] = (
+                self._detail.keypad.battery_level
+            )
 
     async def async_added_to_hass(self) -> None:
         """Restore ATTR_CHANGED_BY on startup since it is likely no longer in the activity log."""

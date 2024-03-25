@@ -1,4 +1,5 @@
 """Adds config flow for Workday integration."""
+
 from __future__ import annotations
 
 from typing import Any

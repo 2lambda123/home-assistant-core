@@ -1,4 +1,5 @@
 """Test the helper method for writing tests."""
+
 from __future__ import annotations
 
 import asyncio
@@ -268,13 +269,15 @@ async def async_test_home_assistant(event_loop, load_registries=True):
     entity.async_setup(hass)
     loader.async_setup(hass)
     if load_registries:
-        with patch(
-            "homeassistant.helpers.storage.Store.async_load", return_value=None
-        ), patch(
-            "homeassistant.helpers.restore_state.RestoreStateData.async_setup_dump",
-            return_value=None,
-        ), patch(
-            "homeassistant.helpers.restore_state.start.async_at_start",
+        with (
+            patch("homeassistant.helpers.storage.Store.async_load", return_value=None),
+            patch(
+                "homeassistant.helpers.restore_state.RestoreStateData.async_setup_dump",
+                return_value=None,
+            ),
+            patch(
+                "homeassistant.helpers.restore_state.start.async_at_start",
+            ),
         ):
             await asyncio.gather(
                 ar.async_load(hass),
@@ -453,12 +456,15 @@ def _async_fire_time_changed(
         future_seconds = task.when() - (hass.loop.time() + _MONOTONIC_RESOLUTION)
 
         if fire_all or mock_seconds_into_future >= future_seconds:
-            with patch(
-                "homeassistant.helpers.event.time_tracker_utcnow",
-                return_value=utc_datetime,
-            ), patch(
-                "homeassistant.helpers.event.time_tracker_timestamp",
-                return_value=timestamp,
+            with (
+                patch(
+                    "homeassistant.helpers.event.time_tracker_utcnow",
+                    return_value=utc_datetime,
+                ),
+                patch(
+                    "homeassistant.helpers.event.time_tracker_timestamp",
+                    return_value=timestamp,
+                ),
             ):
                 task._run()
                 task.cancel()
@@ -1014,9 +1020,9 @@ def assert_setup_component(count, domain=None):
         yield config
 
     if domain is None:
-        assert len(config) == 1, "assert_setup_component requires DOMAIN: {}".format(
-            list(config.keys())
-        )
+        assert (
+            len(config) == 1
+        ), f"assert_setup_component requires DOMAIN: {list(config.keys())}"
         domain = list(config.keys())[0]
 
     res = config.get(domain)
@@ -1282,18 +1288,22 @@ def mock_storage(
         """Remove data."""
         data.pop(store.key, None)
 
-    with patch(
-        "homeassistant.helpers.storage.Store._async_load",
-        side_effect=mock_async_load,
-        autospec=True,
-    ), patch(
-        "homeassistant.helpers.storage.Store._async_write_data",
-        side_effect=mock_write_data,
-        autospec=True,
-    ), patch(
-        "homeassistant.helpers.storage.Store.async_remove",
-        side_effect=mock_remove,
-        autospec=True,
+    with (
+        patch(
+            "homeassistant.helpers.storage.Store._async_load",
+            side_effect=mock_async_load,
+            autospec=True,
+        ),
+        patch(
+            "homeassistant.helpers.storage.Store._async_write_data",
+            side_effect=mock_write_data,
+            autospec=True,
+        ),
+        patch(
+            "homeassistant.helpers.storage.Store.async_remove",
+            side_effect=mock_remove,
+            autospec=True,
+        ),
     ):
         yield data
 

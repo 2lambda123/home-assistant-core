@@ -1,4 +1,5 @@
 """The tests for the GDACS Feed integration."""
+
 import datetime
 from unittest.mock import patch
 
@@ -90,9 +91,10 @@ async def test_setup(hass: HomeAssistant, entity_registry: er.EntityRegistry) ->
 
     # Patching 'utcnow' to gain more control over the timed update.
     utcnow = dt_util.utcnow()
-    with freeze_time(utcnow), patch(
-        "aio_georss_client.feed.GeoRssFeed.update"
-    ) as mock_feed_update:
+    with (
+        freeze_time(utcnow),
+        patch("aio_georss_client.feed.GeoRssFeed.update") as mock_feed_update,
+    ):
         mock_feed_update.return_value = "OK", [mock_entry_1, mock_entry_2, mock_entry_3]
         assert await async_setup_component(hass, gdacs.DOMAIN, CONFIG)
         await hass.async_block_till_done()
@@ -218,10 +220,10 @@ async def test_setup_imperial(hass: HomeAssistant) -> None:
 
     # Patching 'utcnow' to gain more control over the timed update.
     utcnow = dt_util.utcnow()
-    with freeze_time(utcnow), patch(
-        "aio_georss_client.feed.GeoRssFeed.update"
-    ) as mock_feed_update, patch(
-        "aio_georss_client.feed.GeoRssFeed.last_timestamp", create=True
+    with (
+        freeze_time(utcnow),
+        patch("aio_georss_client.feed.GeoRssFeed.update") as mock_feed_update,
+        patch("aio_georss_client.feed.GeoRssFeed.last_timestamp", create=True),
     ):
         mock_feed_update.return_value = "OK", [mock_entry_1]
         assert await async_setup_component(hass, gdacs.DOMAIN, CONFIG)

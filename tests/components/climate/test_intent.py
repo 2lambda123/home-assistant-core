@@ -1,4 +1,5 @@
 """Test climate intents."""
+
 from collections.abc import Generator
 from unittest.mock import patch
 
@@ -216,16 +217,18 @@ async def test_get_temperature_no_state(
         climate_1.entity_id, area_id=living_room_area.id
     )
 
-    with patch("homeassistant.core.StateMachine.get", return_value=None), pytest.raises(
-        intent.IntentHandleError
+    with (
+        patch("homeassistant.core.StateMachine.get", return_value=None),
+        pytest.raises(intent.IntentHandleError),
     ):
         await intent.async_handle(
             hass, "test", climate_intent.INTENT_GET_TEMPERATURE, {}
         )
 
-    with patch(
-        "homeassistant.core.StateMachine.async_all", return_value=[]
-    ), pytest.raises(intent.IntentHandleError):
+    with (
+        patch("homeassistant.core.StateMachine.async_all", return_value=[]),
+        pytest.raises(intent.IntentHandleError),
+    ):
         await intent.async_handle(
             hass,
             "test",

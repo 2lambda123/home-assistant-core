@@ -1,4 +1,5 @@
 """Config flow for Sonarr."""
+
 from __future__ import annotations
 
 from collections.abc import Mapping
@@ -141,9 +142,9 @@ class SonarrConfigFlow(ConfigFlow, domain=DOMAIN):
         }
 
         if self.show_advanced_options:
-            data_schema[
-                vol.Optional(CONF_VERIFY_SSL, default=DEFAULT_VERIFY_SSL)
-            ] = bool
+            data_schema[vol.Optional(CONF_VERIFY_SSL, default=DEFAULT_VERIFY_SSL)] = (
+                bool
+            )
 
         return data_schema
 

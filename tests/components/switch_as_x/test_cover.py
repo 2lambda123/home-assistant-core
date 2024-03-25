@@ -1,4 +1,5 @@
 """Tests for the Switch as X Cover platform."""
+
 from homeassistant.components.cover import DOMAIN as COVER_DOMAIN
 from homeassistant.components.switch import DOMAIN as SWITCH_DOMAIN
 from homeassistant.components.switch_as_x.const import CONF_TARGET_DOMAIN, DOMAIN

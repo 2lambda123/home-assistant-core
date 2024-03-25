@@ -1,4 +1,5 @@
 """Support for statistics for sensor values."""
+
 from __future__ import annotations
 
 from collections import deque
@@ -202,8 +203,8 @@ def valid_state_characteristic_configuration(config: dict[str, Any]) -> dict[str
         not is_binary and characteristic not in STATS_NUMERIC_SUPPORT
     ):
         raise vol.ValueInvalid(
-            "The configured characteristic '{}' is not supported for the configured"
-            " source sensor".format(characteristic)
+            f"The configured characteristic '{characteristic}' is not supported for the configured"
+            " source sensor"
         )
     return config
 
@@ -307,9 +308,9 @@ class StatisticsSensor(SensorEntity):
         self.ages: deque[datetime] = deque(maxlen=self._samples_max_buffer_size)
         self.attributes: dict[str, StateType] = {}
 
-        self._state_characteristic_fn: Callable[
-            [], StateType | datetime
-        ] = self._callable_characteristic_fn(self._state_characteristic)
+        self._state_characteristic_fn: Callable[[], StateType | datetime] = (
+            self._callable_characteristic_fn(self._state_characteristic)
+        )
 
         self._update_listener: CALLBACK_TYPE | None = None
 

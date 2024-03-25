@@ -1,4 +1,5 @@
 """Ask tankerkoenig.de for petrol price information."""
+
 from __future__ import annotations
 
 import logging

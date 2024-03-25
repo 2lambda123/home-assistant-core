@@ -1,4 +1,5 @@
 """Sensor for checking the status of London air."""
+
 from __future__ import annotations
 
 from datetime import timedelta
@@ -166,9 +167,9 @@ def parse_species(species_data):
             species_dict["code"] = species["@SpeciesCode"]
             species_dict["quality"] = species["@AirQualityBand"]
             species_dict["index"] = species["@AirQualityIndex"]
-            species_dict[
-                "summary"
-            ] = f"{species_dict['code']} is {species_dict['quality']}"
+            species_dict["summary"] = (
+                f"{species_dict['code']} is {species_dict['quality']}"
+            )
             parsed_species_data.append(species_dict)
             quality_list.append(species_dict["quality"])
     return parsed_species_data, quality_list

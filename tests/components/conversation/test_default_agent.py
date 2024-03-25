@@ -1,4 +1,5 @@
 """Test for the default agent."""
+
 from collections import defaultdict
 from unittest.mock import AsyncMock, patch
 

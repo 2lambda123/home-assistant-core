@@ -1,4 +1,5 @@
 """Test stt."""
+
 from __future__ import annotations
 
 import asyncio
@@ -100,10 +101,13 @@ async def test_streaming_audio_oserror(
         [Detection(name="Test Model", timestamp=1000).event()]
     )
 
-    with patch(
-        "homeassistant.components.wyoming.wake_word.AsyncTcpClient",
-        mock_client,
-    ), patch.object(mock_client, "read_event", side_effect=OSError("Boom!")):
+    with (
+        patch(
+            "homeassistant.components.wyoming.wake_word.AsyncTcpClient",
+            mock_client,
+        ),
+        patch.object(mock_client, "read_event", side_effect=OSError("Boom!")),
+    ):
         result = await entity.async_process_audio_stream(audio_stream(), None)
 
     assert result is None

@@ -1,4 +1,5 @@
 """The tests for the Button component."""
+
 from collections.abc import Generator
 from unittest.mock import MagicMock, patch
 

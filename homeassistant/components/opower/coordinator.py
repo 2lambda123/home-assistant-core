@@ -1,4 +1,5 @@
 """Coordinator to handle Opower connections."""
+
 from datetime import datetime, timedelta
 import logging
 from types import MappingProxyType

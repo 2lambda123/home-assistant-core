@@ -1,4 +1,5 @@
 """Tests for the Switch as X Valve platform."""
+
 from homeassistant.components.switch import DOMAIN as SWITCH_DOMAIN
 from homeassistant.components.switch_as_x.const import CONF_TARGET_DOMAIN, DOMAIN
 from homeassistant.components.valve import DOMAIN as VALVE_DOMAIN

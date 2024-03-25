@@ -1,4 +1,5 @@
 """Climate entities for the Overkiz (by Somfy) integration."""
+
 from pyoverkiz.enums import Protocol
 from pyoverkiz.enums.ui import UIWidget
 

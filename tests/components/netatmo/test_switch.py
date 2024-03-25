@@ -1,4 +1,5 @@
 """The tests for Netatmo switch."""
+
 from unittest.mock import patch
 
 from homeassistant.components.switch import (

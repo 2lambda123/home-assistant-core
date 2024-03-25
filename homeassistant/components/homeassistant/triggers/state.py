@@ -1,4 +1,5 @@
 """Offer state listening automation rules."""
+
 from __future__ import annotations
 
 from datetime import timedelta

@@ -1,6 +1,5 @@
 """Constants for Axis integration tests."""
 
-
 MAC = "00408C123456"
 FORMATTED_MAC = "00:40:8c:12:34:56"
 MODEL = "model"

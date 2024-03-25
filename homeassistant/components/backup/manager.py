@@ -1,4 +1,5 @@
 """Backup manager for the Backup integration."""
+
 from __future__ import annotations
 
 import asyncio
@@ -228,9 +229,10 @@ class BackupManager:
             LOGGER.debug("Creating backup directory")
             self.backup_dir.mkdir()
 
-        with TemporaryDirectory() as tmp_dir, SecureTarFile(
-            tar_file_path, "w", gzip=False, bufsize=BUF_SIZE
-        ) as tar_file:
+        with (
+            TemporaryDirectory() as tmp_dir,
+            SecureTarFile(tar_file_path, "w", gzip=False, bufsize=BUF_SIZE) as tar_file,
+        ):
             tmp_dir_path = Path(tmp_dir)
             save_json(
                 tmp_dir_path.joinpath("./backup.json").as_posix(),

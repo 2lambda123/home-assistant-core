@@ -1,4 +1,5 @@
 """The Intent integration."""
+
 import logging
 
 import voluptuous as vol

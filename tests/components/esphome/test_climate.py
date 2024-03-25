@@ -1,6 +1,5 @@
 """Test ESPHome climates."""
 
-
 from unittest.mock import call
 
 from aioesphomeapi import (

@@ -1,4 +1,5 @@
 """Support for bypassing Risco alarm zones."""
+
 from __future__ import annotations
 
 from pyrisco.common import Zone

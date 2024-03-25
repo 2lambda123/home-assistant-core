@@ -1,4 +1,5 @@
 """Test deprecation helpers."""
+
 from enum import StrEnum
 import logging
 import sys
@@ -342,25 +343,28 @@ def test_check_if_deprecated_constant(
     filename = f"/home/paulus/{module_name.replace('.', '/')}.py"
 
     # mock sys.modules for homeassistant/helpers/frame.py#get_integration_frame
-    with patch.dict(sys.modules, {module_name: Mock(__file__=filename)}), patch(
-        "homeassistant.helpers.frame.extract_stack",
-        return_value=[
-            Mock(
-                filename="/home/paulus/homeassistant/core.py",
-                lineno="23",
-                line="do_something()",
-            ),
-            Mock(
-                filename=filename,
-                lineno="23",
-                line="await session.close()",
-            ),
-            Mock(
-                filename="/home/paulus/aiohue/lights.py",
-                lineno="2",
-                line="something()",
-            ),
-        ],
+    with (
+        patch.dict(sys.modules, {module_name: Mock(__file__=filename)}),
+        patch(
+            "homeassistant.helpers.frame.extract_stack",
+            return_value=[
+                Mock(
+                    filename="/home/paulus/homeassistant/core.py",
+                    lineno="23",
+                    line="do_something()",
+                ),
+                Mock(
+                    filename=filename,
+                    lineno="23",
+                    line="await session.close()",
+                ),
+                Mock(
+                    filename="/home/paulus/aiohue/lights.py",
+                    lineno="2",
+                    line="something()",
+                ),
+            ],
+        ),
     ):
         value = check_if_deprecated_constant("TEST_CONSTANT", module_globals)
         assert value == _get_value(deprecated_constant)

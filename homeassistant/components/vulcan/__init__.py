@@ -1,4 +1,5 @@
 """The Vulcan component."""
+
 import sys
 
 from aiohttp import ClientConnectorError

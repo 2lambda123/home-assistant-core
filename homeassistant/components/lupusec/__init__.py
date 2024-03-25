@@ -1,4 +1,5 @@
 """Support for Lupusec Home Security system."""
+
 import logging
 
 import lupupy

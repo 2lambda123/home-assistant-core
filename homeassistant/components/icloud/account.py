@@ -1,4 +1,5 @@
 """iCloud account."""
+
 from __future__ import annotations
 
 from datetime import timedelta
@@ -149,9 +150,9 @@ class IcloudAccount:
         self._family_members_fullname = {}
         if user_info.get("membersInfo") is not None:
             for prs_id, member in user_info["membersInfo"].items():
-                self._family_members_fullname[
-                    prs_id
-                ] = f"{member['firstName']} {member['lastName']}"
+                self._family_members_fullname[prs_id] = (
+                    f"{member['firstName']} {member['lastName']}"
+                )
 
         self._devices = {}
         self.update_devices()

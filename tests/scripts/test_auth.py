@@ -1,4 +1,5 @@
 """Test the auth script to manage local users."""
+
 from typing import Any
 from unittest.mock import Mock, patch
 

@@ -1,4 +1,5 @@
 """Tests for Shelly button platform."""
+
 from __future__ import annotations
 
 import pytest

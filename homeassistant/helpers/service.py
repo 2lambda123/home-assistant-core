@@ -1,4 +1,5 @@
 """Service calling related helpers."""
+
 from __future__ import annotations
 
 import asyncio
@@ -574,9 +575,9 @@ async def async_get_all_descriptions(
     hass: HomeAssistant,
 ) -> dict[str, dict[str, Any]]:
     """Return descriptions (i.e. user documentation) for all service calls."""
-    descriptions_cache: dict[
-        tuple[str, str], dict[str, Any] | None
-    ] = hass.data.setdefault(SERVICE_DESCRIPTION_CACHE, {})
+    descriptions_cache: dict[tuple[str, str], dict[str, Any] | None] = (
+        hass.data.setdefault(SERVICE_DESCRIPTION_CACHE, {})
+    )
     services = hass.services.async_services()
 
     # See if there are new services not seen before.
@@ -715,9 +716,9 @@ def async_set_service_schema(
     domain = domain.lower()
     service = service.lower()
 
-    descriptions_cache: dict[
-        tuple[str, str], dict[str, Any] | None
-    ] = hass.data.setdefault(SERVICE_DESCRIPTION_CACHE, {})
+    descriptions_cache: dict[tuple[str, str], dict[str, Any] | None] = (
+        hass.data.setdefault(SERVICE_DESCRIPTION_CACHE, {})
+    )
 
     description = {
         "name": schema.get("name", ""),

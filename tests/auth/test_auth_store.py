@@ -1,4 +1,5 @@
 """Tests for the auth store."""
+
 import asyncio
 from typing import Any
 from unittest.mock import patch
@@ -245,13 +246,13 @@ async def test_system_groups_store_id_and_name(
 async def test_loading_race_condition(hass: HomeAssistant) -> None:
     """Test only one storage load called when concurrent loading occurred ."""
     store = auth_store.AuthStore(hass)
-    with patch(
-        "homeassistant.helpers.entity_registry.async_get"
-    ) as mock_ent_registry, patch(
-        "homeassistant.helpers.device_registry.async_get"
-    ) as mock_dev_registry, patch(
-        "homeassistant.helpers.storage.Store.async_load", return_value=None
-    ) as mock_load:
+    with (
+        patch("homeassistant.helpers.entity_registry.async_get") as mock_ent_registry,
+        patch("homeassistant.helpers.device_registry.async_get") as mock_dev_registry,
+        patch(
+            "homeassistant.helpers.storage.Store.async_load", return_value=None
+        ) as mock_load,
+    ):
         results = await asyncio.gather(store.async_get_users(), store.async_get_users())
 
         mock_ent_registry.assert_called_once_with(hass)

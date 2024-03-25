@@ -1,4 +1,5 @@
 """Provides functionality to interact with lights."""
+
 from __future__ import annotations
 
 from collections.abc import Iterable
@@ -1093,10 +1094,10 @@ class LightEntity(ToggleEntity, cached_properties=CACHED_PROPERTIES_WITH_ATTR_):
             if color_mode == ColorMode.COLOR_TEMP:
                 data[ATTR_COLOR_TEMP_KELVIN] = self.color_temp_kelvin
                 if self.color_temp_kelvin:
-                    data[
-                        ATTR_COLOR_TEMP
-                    ] = color_util.color_temperature_kelvin_to_mired(
-                        self.color_temp_kelvin
+                    data[ATTR_COLOR_TEMP] = (
+                        color_util.color_temperature_kelvin_to_mired(
+                            self.color_temp_kelvin
+                        )
                     )
                 else:
                     data[ATTR_COLOR_TEMP] = None
@@ -1109,10 +1110,10 @@ class LightEntity(ToggleEntity, cached_properties=CACHED_PROPERTIES_WITH_ATTR_):
             if self.is_on:
                 data[ATTR_COLOR_TEMP_KELVIN] = self.color_temp_kelvin
                 if self.color_temp_kelvin:
-                    data[
-                        ATTR_COLOR_TEMP
-                    ] = color_util.color_temperature_kelvin_to_mired(
-                        self.color_temp_kelvin
+                    data[ATTR_COLOR_TEMP] = (
+                        color_util.color_temperature_kelvin_to_mired(
+                            self.color_temp_kelvin
+                        )
                     )
                 else:
                     data[ATTR_COLOR_TEMP] = None

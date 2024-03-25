@@ -1,4 +1,5 @@
 """Support to trigger Maker IFTTT recipes."""
+
 from http import HTTPStatus
 import json
 import logging

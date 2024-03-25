@@ -1,4 +1,5 @@
 """Tests for Shelly update platform."""
+
 from unittest.mock import AsyncMock
 
 from aioshelly.exceptions import DeviceConnectionError, InvalidAuthError, RpcCallError

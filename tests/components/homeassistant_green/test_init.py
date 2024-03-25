@@ -1,4 +1,5 @@
 """Test the Home Assistant Green integration."""
+
 from unittest.mock import patch
 
 from homeassistant.components.homeassistant_green.const import DOMAIN

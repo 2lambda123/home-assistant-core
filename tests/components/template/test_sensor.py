@@ -1,4 +1,5 @@
 """The test for the Template sensor platform."""
+
 from asyncio import Event
 from datetime import timedelta
 from unittest.mock import ANY, patch
@@ -391,12 +392,15 @@ async def test_creating_sensor_loads_group(hass: HomeAssistant) -> None:
 
     hass.bus.async_listen(EVENT_COMPONENT_LOADED, set_after_dep_event)
 
-    with patch(
-        "homeassistant.components.group.async_setup",
-        new=async_setup_group,
-    ), patch(
-        "homeassistant.components.template.sensor.async_setup_platform",
-        new=async_setup_template,
+    with (
+        patch(
+            "homeassistant.components.group.async_setup",
+            new=async_setup_group,
+        ),
+        patch(
+            "homeassistant.components.template.sensor.async_setup_platform",
+            new=async_setup_template,
+        ),
     ):
         await async_from_config_dict(
             {"sensor": {"platform": "template", "sensors": {}}, "group": {}}, hass

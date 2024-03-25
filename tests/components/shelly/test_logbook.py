@@ -1,4 +1,5 @@
 """The tests for Shelly logbook."""
+
 from homeassistant.components.shelly.const import (
     ATTR_CHANNEL,
     ATTR_CLICK_TYPE,

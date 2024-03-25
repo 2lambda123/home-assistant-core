@@ -1,4 +1,5 @@
 """Test the entity helper."""
+
 import asyncio
 from collections.abc import Iterable
 import dataclasses
@@ -735,12 +736,13 @@ async def test_disabled_in_entity_registry(hass: HomeAssistant) -> None:
 
 async def test_capability_attrs(hass: HomeAssistant) -> None:
     """Test we still include capabilities even when unavailable."""
-    with patch.object(
-        entity.Entity, "available", PropertyMock(return_value=False)
-    ), patch.object(
-        entity.Entity,
-        "capability_attributes",
-        PropertyMock(return_value={"always": "there"}),
+    with (
+        patch.object(entity.Entity, "available", PropertyMock(return_value=False)),
+        patch.object(
+            entity.Entity,
+            "capability_attributes",
+            PropertyMock(return_value={"always": "there"}),
+        ),
     ):
         ent = entity.Entity()
         ent.hass = hass

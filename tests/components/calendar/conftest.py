@@ -1,4 +1,5 @@
 """Test fixtures for calendar sensor platforms."""
+
 import pytest
 
 from homeassistant.core import HomeAssistant

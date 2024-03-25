@@ -1,4 +1,5 @@
 """Offer API to configure the Home Assistant auth provider."""
+
 from typing import Any
 
 import voluptuous as vol

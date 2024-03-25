@@ -1,4 +1,5 @@
 """The tests for the person component."""
+
 from http import HTTPStatus
 from typing import Any
 from unittest.mock import patch

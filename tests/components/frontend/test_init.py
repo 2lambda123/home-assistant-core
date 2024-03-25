@@ -1,4 +1,5 @@
 """The tests for Home Assistant frontend."""
+
 from datetime import timedelta
 from http import HTTPStatus
 import re

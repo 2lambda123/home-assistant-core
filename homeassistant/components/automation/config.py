@@ -1,4 +1,5 @@
 """Config validation helper for the automation integration."""
+
 from __future__ import annotations
 
 import asyncio

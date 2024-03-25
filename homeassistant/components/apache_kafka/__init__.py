@@ -1,4 +1,5 @@
 """Support for Apache Kafka."""
+
 from datetime import datetime
 import json
 import sys

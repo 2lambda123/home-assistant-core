@@ -1,4 +1,5 @@
 """Test security filter middleware."""
+
 from http import HTTPStatus
 
 from aiohttp import web

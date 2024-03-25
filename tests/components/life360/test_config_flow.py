@@ -1,4 +1,5 @@
 """Test the Life360 config flow."""
+
 from unittest.mock import patch
 
 from life360 import Life360Error, LoginError
@@ -67,9 +68,10 @@ TEST_OPTIONS = {
 @pytest.fixture(name="life360", autouse=True)
 def life360_fixture():
     """Mock life360 config entry setup & unload."""
-    with patch(
-        "homeassistant.components.life360.async_setup_entry", return_value=True
-    ), patch("homeassistant.components.life360.async_unload_entry", return_value=True):
+    with (
+        patch("homeassistant.components.life360.async_setup_entry", return_value=True),
+        patch("homeassistant.components.life360.async_unload_entry", return_value=True),
+    ):
         yield
 
 

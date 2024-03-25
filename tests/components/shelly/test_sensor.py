@@ -1,4 +1,5 @@
 """Tests for Shelly sensor platform."""
+
 from freezegun.api import FrozenDateTimeFactory
 import pytest
 

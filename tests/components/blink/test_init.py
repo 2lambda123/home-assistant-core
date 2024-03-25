@@ -1,4 +1,5 @@
 """Test the Blink init."""
+
 import asyncio
 from unittest.mock import AsyncMock, MagicMock
 

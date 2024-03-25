@@ -1,4 +1,5 @@
 """Test wake_word component setup."""
+
 import asyncio
 from collections.abc import AsyncIterable, Generator
 from functools import partial
@@ -320,9 +321,10 @@ async def test_list_wake_words_timeout(
     """Test that the list_wake_words websocket command handles unknown entity."""
     client = await hass_ws_client(hass)
 
-    with patch.object(
-        setup, "get_supported_wake_words", partial(asyncio.sleep, 1)
-    ), patch("homeassistant.components.wake_word.TIMEOUT_FETCH_WAKE_WORDS", 0):
+    with (
+        patch.object(setup, "get_supported_wake_words", partial(asyncio.sleep, 1)),
+        patch("homeassistant.components.wake_word.TIMEOUT_FETCH_WAKE_WORDS", 0),
+    ):
         await client.send_json(
             {
                 "id": 5,
