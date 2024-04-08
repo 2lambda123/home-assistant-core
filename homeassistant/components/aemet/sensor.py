@@ -1,4 +1,5 @@
 """Support for the AEMET OpenData service."""
+
 from __future__ import annotations
 
 from homeassistant.components.sensor import (

@@ -1,4 +1,5 @@
 """Test the thread dataset store."""
+
 from typing import Any
 
 import pytest

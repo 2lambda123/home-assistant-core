@@ -1,4 +1,5 @@
 """Config flow for OwnTracks."""
+
 import secrets
 
 from homeassistant import config_entries

@@ -1,4 +1,5 @@
 """The tests for the Traccar device tracker platform."""
+
 from unittest.mock import AsyncMock, patch
 
 from pytraccar import ReportsEventeModel

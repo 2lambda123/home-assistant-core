@@ -1,4 +1,5 @@
 """Hass.io const variables."""
+
 from enum import StrEnum
 
 DOMAIN = "hassio"

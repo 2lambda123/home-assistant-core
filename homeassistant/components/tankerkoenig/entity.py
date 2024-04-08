@@ -1,4 +1,5 @@
 """The tankerkoenig base entity."""
+
 from homeassistant.const import ATTR_ID
 from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity

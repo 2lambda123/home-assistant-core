@@ -1,4 +1,5 @@
 """Support for Notion sensors."""
+
 from dataclasses import dataclass
 
 from aionotion.sensor.models import ListenerKind

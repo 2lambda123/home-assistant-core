@@ -1,4 +1,5 @@
 """Constants for the homekit_controller component."""
+
 import asyncio
 
 from aiohomekit.exceptions import (

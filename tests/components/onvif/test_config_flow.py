@@ -1,4 +1,5 @@
 """Test ONVIF config flow."""
+
 import logging
 from unittest.mock import MagicMock, patch
 
@@ -113,13 +114,15 @@ async def test_flow_discovered_devices(hass: HomeAssistant) -> None:
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera)
         setup_mock_discovery(mock_discovery)
         setup_mock_device(mock_device)
@@ -184,13 +187,15 @@ async def test_flow_discovered_devices_ignore_configured_manual_input(
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera)
         setup_mock_discovery(mock_discovery, with_mac=True)
         setup_mock_device(mock_device)
@@ -223,13 +228,15 @@ async def test_flow_discovered_no_device(hass: HomeAssistant) -> None:
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera)
         setup_mock_discovery(mock_discovery, no_devices=True)
         setup_mock_device(mock_device)
@@ -266,13 +273,15 @@ async def test_flow_discovery_ignore_existing_and_abort(hass: HomeAssistant) -> 
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera)
         setup_mock_discovery(mock_discovery, with_name=True, with_mac=True)
         setup_mock_device(mock_device)
@@ -310,13 +319,15 @@ async def test_flow_manual_entry(hass: HomeAssistant) -> None:
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera, two_profiles=True)
         # no discovery
         mock_discovery.return_value = []
@@ -367,13 +378,15 @@ async def test_flow_manual_entry_no_profiles(hass: HomeAssistant) -> None:
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera, no_profiles=True)
         # no discovery
         mock_discovery.return_value = []
@@ -407,13 +420,15 @@ async def test_flow_manual_entry_no_mac(hass: HomeAssistant) -> None:
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(
             mock_onvif_camera, with_serial=False, with_interfaces=False
         )
@@ -449,13 +464,15 @@ async def test_flow_manual_entry_fails(hass: HomeAssistant) -> None:
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(
             mock_onvif_camera, two_profiles=True, profiles_transient_failure=True
         )
@@ -557,13 +574,15 @@ async def test_flow_manual_entry_wrong_password(hass: HomeAssistant) -> None:
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera, two_profiles=True, auth_fail=True)
         # no discovery
         mock_discovery.return_value = []
@@ -767,14 +786,16 @@ async def test_form_reauth(hass: HomeAssistant) -> None:
         == entry.data[CONF_USERNAME]
     )
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device, patch(
-        "homeassistant.components.onvif.async_setup_entry",
-        return_value=True,
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+        patch(
+            "homeassistant.components.onvif.async_setup_entry",
+            return_value=True,
+        ) as mock_setup_entry,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera, auth_failure=True)
         setup_mock_device(mock_device)
 
@@ -794,14 +815,16 @@ async def test_form_reauth(hass: HomeAssistant) -> None:
         "error": "not authorized (subcodes:NotAuthorized)"
     }
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device, patch(
-        "homeassistant.components.onvif.async_setup_entry",
-        return_value=True,
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+        patch(
+            "homeassistant.components.onvif.async_setup_entry",
+            return_value=True,
+        ) as mock_setup_entry,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera)
         setup_mock_device(mock_device)
 
@@ -834,13 +857,15 @@ async def test_flow_manual_entry_updates_existing_user_password(
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera, two_profiles=True)
         # no discovery
         mock_discovery.return_value = []
@@ -885,13 +910,15 @@ async def test_flow_manual_entry_wrong_port(hass: HomeAssistant) -> None:
     assert result["type"] == data_entry_flow.FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.onvif.config_flow.get_device"
-    ) as mock_onvif_camera, patch(
-        "homeassistant.components.onvif.config_flow.WSDiscovery"
-    ) as mock_discovery, patch(
-        "homeassistant.components.onvif.ONVIFDevice"
-    ) as mock_device:
+    with (
+        patch(
+            "homeassistant.components.onvif.config_flow.get_device"
+        ) as mock_onvif_camera,
+        patch(
+            "homeassistant.components.onvif.config_flow.WSDiscovery"
+        ) as mock_discovery,
+        patch("homeassistant.components.onvif.ONVIFDevice") as mock_device,
+    ):
         setup_mock_onvif_camera(mock_onvif_camera, wrong_port=True)
         # no discovery
         mock_discovery.return_value = []

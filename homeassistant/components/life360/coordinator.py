@@ -185,14 +185,14 @@ class Life360DataUpdateCoordinator(DataUpdateCoordinator[Life360Data]):
                         and explicit_reason
                     ):
                         if explicit_reason:
-                            self._missing_loc_reason[
-                                member_id
-                            ] = MissingLocReason.EXPLICIT_ERROR_REASON
+                            self._missing_loc_reason[member_id] = (
+                                MissingLocReason.EXPLICIT_ERROR_REASON
+                            )
                             err_msg = explicit_reason
                         else:
-                            self._missing_loc_reason[
-                                member_id
-                            ] = MissingLocReason.VAGUE_ERROR_REASON
+                            self._missing_loc_reason[member_id] = (
+                                MissingLocReason.VAGUE_ERROR_REASON
+                            )
                             err_msg = "Location information missing"
                         LOGGER.error("%s: %s", name, err_msg)
                     continue

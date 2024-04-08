@@ -1,4 +1,5 @@
 """The tests for the cover platform."""
+
 from homeassistant.components.cover import (
     SERVICE_CLOSE_COVER,
     SERVICE_OPEN_COVER,

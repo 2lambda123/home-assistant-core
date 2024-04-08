@@ -1,4 +1,5 @@
 """Test config flow."""
+
 import asyncio
 from ipaddress import ip_address
 import json

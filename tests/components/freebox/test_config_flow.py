@@ -1,4 +1,5 @@
 """Tests for the Freebox config flow."""
+
 from ipaddress import ip_address
 from unittest.mock import Mock, patch
 
@@ -82,12 +83,15 @@ async def test_zeroconf(hass: HomeAssistant) -> None:
 
 async def test_link(hass: HomeAssistant, router: Mock) -> None:
     """Test linking."""
-    with patch(
-        "homeassistant.components.freebox.async_setup", return_value=True
-    ) as mock_setup, patch(
-        "homeassistant.components.freebox.async_setup_entry",
-        return_value=True,
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.freebox.async_setup", return_value=True
+        ) as mock_setup,
+        patch(
+            "homeassistant.components.freebox.async_setup_entry",
+            return_value=True,
+        ) as mock_setup_entry,
+    ):
         result = await hass.config_entries.flow.async_init(
             DOMAIN,
             context={"source": SOURCE_USER},

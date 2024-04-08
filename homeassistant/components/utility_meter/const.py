@@ -1,4 +1,5 @@
 """Constants for the utility meter component."""
+
 DOMAIN = "utility_meter"
 
 TARIFF_ICON = "mdi:clock-outline"

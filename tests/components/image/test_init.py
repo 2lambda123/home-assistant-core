@@ -1,4 +1,5 @@
 """The tests for the image component."""
+
 from http import HTTPStatus
 import ssl
 from unittest.mock import MagicMock, patch

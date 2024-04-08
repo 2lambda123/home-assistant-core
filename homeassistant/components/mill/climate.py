@@ -1,4 +1,5 @@
 """Support for mill wifi-enabled home heaters."""
+
 from typing import Any
 
 import mill

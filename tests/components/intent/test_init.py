@@ -1,4 +1,5 @@
 """Tests for Intent component."""
+
 import pytest
 
 from homeassistant.components.cover import SERVICE_OPEN_COVER

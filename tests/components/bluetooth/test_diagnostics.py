@@ -1,4 +1,5 @@
 """Test bluetooth diagnostics."""
+
 from unittest.mock import ANY, MagicMock, patch
 
 from bleak.backends.scanner import AdvertisementData, BLEDevice
@@ -55,27 +56,30 @@ async def test_diagnostics(
     # error if the test is not running on linux since we won't have the correct
     # deps installed when testing on MacOS.
 
-    with patch(
-        "homeassistant.components.bluetooth.diagnostics.platform.system",
-        return_value="Linux",
-    ), patch(
-        "homeassistant.components.bluetooth.diagnostics.get_dbus_managed_objects",
-        return_value={
-            "org.bluez": {
-                "/org/bluez/hci0": {
-                    "org.bluez.Adapter1": {
-                        "Name": "BlueZ 5.63",
-                        "Alias": "BlueZ 5.63",
-                        "Modalias": "usb:v1D6Bp0246d0540",
-                        "Discovering": False,
-                    },
-                    "org.bluez.AdvertisementMonitorManager1": {
-                        "SupportedMonitorTypes": ["or_patterns"],
-                        "SupportedFeatures": [],
-                    },
+    with (
+        patch(
+            "homeassistant.components.bluetooth.diagnostics.platform.system",
+            return_value="Linux",
+        ),
+        patch(
+            "homeassistant.components.bluetooth.diagnostics.get_dbus_managed_objects",
+            return_value={
+                "org.bluez": {
+                    "/org/bluez/hci0": {
+                        "org.bluez.Adapter1": {
+                            "Name": "BlueZ 5.63",
+                            "Alias": "BlueZ 5.63",
+                            "Modalias": "usb:v1D6Bp0246d0540",
+                            "Discovering": False,
+                        },
+                        "org.bluez.AdvertisementMonitorManager1": {
+                            "SupportedMonitorTypes": ["or_patterns"],
+                            "SupportedFeatures": [],
+                        },
+                    }
                 }
-            }
-        },
+            },
+        ),
     ):
         entry1 = MockConfigEntry(
             domain=bluetooth.DOMAIN, data={}, unique_id="00:00:00:00:00:01"
@@ -262,12 +266,15 @@ async def test_diagnostics_macos(
         local_name="wohand", service_uuids=[], manufacturer_data={1: b"\x01"}
     )
 
-    with patch(
-        "homeassistant.components.bluetooth.diagnostics.platform.system",
-        return_value="Darwin",
-    ), patch(
-        "homeassistant.components.bluetooth.diagnostics.get_dbus_managed_objects",
-        return_value={},
+    with (
+        patch(
+            "homeassistant.components.bluetooth.diagnostics.platform.system",
+            return_value="Darwin",
+        ),
+        patch(
+            "homeassistant.components.bluetooth.diagnostics.get_dbus_managed_objects",
+            return_value={},
+        ),
     ):
         entry1 = MockConfigEntry(
             domain=bluetooth.DOMAIN,
@@ -440,12 +447,15 @@ async def test_diagnostics_remote_adapter(
                 MONOTONIC_TIME(),
             )
 
-    with patch(
-        "homeassistant.components.bluetooth.diagnostics.platform.system",
-        return_value="Linux",
-    ), patch(
-        "homeassistant.components.bluetooth.diagnostics.get_dbus_managed_objects",
-        return_value={},
+    with (
+        patch(
+            "homeassistant.components.bluetooth.diagnostics.platform.system",
+            return_value="Linux",
+        ),
+        patch(
+            "homeassistant.components.bluetooth.diagnostics.get_dbus_managed_objects",
+            return_value={},
+        ),
     ):
         entry1 = MockConfigEntry(
             domain=bluetooth.DOMAIN, data={}, unique_id="00:00:00:00:00:01"

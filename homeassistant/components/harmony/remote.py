@@ -1,4 +1,5 @@
 """Support for Harmony Hub devices."""
+
 from collections.abc import Iterable
 import json
 import logging

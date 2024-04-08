@@ -1,4 +1,5 @@
 """Support for GPSD."""
+
 from __future__ import annotations
 
 import logging

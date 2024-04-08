@@ -1,4 +1,5 @@
 """HTTP specific constants."""
+
 from typing import Final
 
 KEY_AUTHENTICATED: Final = "ha_authenticated"

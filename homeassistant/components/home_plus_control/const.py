@@ -1,4 +1,5 @@
 """Constants for the Legrand Home+ Control integration."""
+
 API = "api"
 CONF_SUBSCRIPTION_KEY = "subscription_key"
 CONF_PLANT_UPDATE_INTERVAL = "plant_update_interval"

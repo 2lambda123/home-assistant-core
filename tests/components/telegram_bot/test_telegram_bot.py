@@ -1,4 +1,5 @@
 """Tests for the telegram_bot component."""
+
 import pytest
 from telegram import Update
 from telegram.ext.dispatcher import Dispatcher

@@ -1,4 +1,5 @@
 """The Legrand Home+ Control integration."""
+
 import asyncio
 from datetime import timedelta
 import logging

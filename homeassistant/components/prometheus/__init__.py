@@ -1,4 +1,5 @@
 """Support for Prometheus metrics export."""
+
 from contextlib import suppress
 import logging
 import string

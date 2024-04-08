@@ -1,4 +1,5 @@
 """Nightscout util functions."""
+
 import hashlib
 
 

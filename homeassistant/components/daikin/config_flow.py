@@ -1,4 +1,5 @@
 """Config flow for the Daikin platform."""
+
 import asyncio
 import logging
 from uuid import uuid4

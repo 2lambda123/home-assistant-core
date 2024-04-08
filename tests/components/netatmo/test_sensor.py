@@ -1,4 +1,5 @@
 """The tests for the Netatmo sensor platform."""
+
 from unittest.mock import patch
 
 import pytest
@@ -209,8 +210,9 @@ async def test_climate_battery_sensor(
     hass: HomeAssistant, config_entry, netatmo_auth
 ) -> None:
     """Test climate device battery sensor."""
-    with patch("time.time", return_value=TEST_TIME), selected_platforms(
-        ["sensor", "climate"]
+    with (
+        patch("time.time", return_value=TEST_TIME),
+        selected_platforms(["sensor", "climate"]),
     ):
         assert await hass.config_entries.async_setup(config_entry.entry_id)
 

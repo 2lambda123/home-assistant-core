@@ -1,4 +1,5 @@
 """Tests for the mobile app integration."""
+
 from homeassistant.components.mobile_app.const import DATA_DELETED_IDS, DOMAIN
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import device_registry as dr, entity_registry as er

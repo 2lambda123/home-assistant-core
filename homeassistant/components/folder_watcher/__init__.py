@@ -1,4 +1,5 @@
 """Component for monitoring activity on a folder."""
+
 import logging
 import os
 

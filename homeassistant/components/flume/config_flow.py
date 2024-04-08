@@ -1,4 +1,5 @@
 """Config flow for flume integration."""
+
 from collections.abc import Mapping
 import logging
 import os

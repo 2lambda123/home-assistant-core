@@ -1,4 +1,5 @@
 """Test the Ukraine Alarm config flow."""
+
 import asyncio
 from collections.abc import Generator
 from unittest.mock import AsyncMock, patch

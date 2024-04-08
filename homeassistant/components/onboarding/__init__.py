@@ -1,4 +1,5 @@
 """Support to help onboard new users."""
+
 from typing import TYPE_CHECKING
 
 from homeassistant.core import HomeAssistant, callback

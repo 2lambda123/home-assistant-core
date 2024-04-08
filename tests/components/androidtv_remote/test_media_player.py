@@ -1,4 +1,5 @@
 """Tests for the Android TV Remote remote platform."""
+
 import asyncio
 from unittest.mock import MagicMock, call
 

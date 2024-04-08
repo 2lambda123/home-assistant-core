@@ -1,4 +1,5 @@
 """Tests for the Blue Current integration."""
+
 from __future__ import annotations
 
 from unittest.mock import patch
@@ -33,10 +34,10 @@ async def init_integration(
         self.grid = grid
         self.available = True
 
-    with patch(
-        "homeassistant.components.blue_current.PLATFORMS", [platform]
-    ), patch.object(Connector, "__init__", init), patch(
-        "homeassistant.components.blue_current.Client", autospec=True
+    with (
+        patch("homeassistant.components.blue_current.PLATFORMS", [platform]),
+        patch.object(Connector, "__init__", init),
+        patch("homeassistant.components.blue_current.Client", autospec=True),
     ):
         config_entry = MockConfigEntry(
             domain=DOMAIN,

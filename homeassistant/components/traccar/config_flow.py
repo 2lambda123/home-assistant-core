@@ -1,4 +1,5 @@
 """Config flow for Traccar."""
+
 from homeassistant.helpers import config_entry_flow
 
 from .const import DOMAIN

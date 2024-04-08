@@ -1,4 +1,5 @@
 """Test the Balboa Spa Client integration."""
+
 from __future__ import annotations
 
 from homeassistant.components.balboa import CONF_SYNC_TIME, DOMAIN

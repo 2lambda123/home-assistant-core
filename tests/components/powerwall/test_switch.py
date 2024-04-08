@@ -1,4 +1,5 @@
 """Test for Powerwall off-grid switch."""
+
 from unittest.mock import Mock, patch
 
 import pytest

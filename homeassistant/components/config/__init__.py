@@ -1,4 +1,5 @@
 """Component to configure Home Assistant via an API."""
+
 import asyncio
 from http import HTTPStatus
 import importlib

@@ -1,4 +1,5 @@
 """Tests for the TP-Link component."""
+
 from __future__ import annotations
 
 from datetime import timedelta
@@ -29,8 +30,9 @@ from tests.common import MockConfigEntry, async_fire_time_changed
 
 async def test_configuring_tplink_causes_discovery(hass: HomeAssistant) -> None:
     """Test that specifying empty config does discovery."""
-    with patch("homeassistant.components.tplink.Discover.discover") as discover, patch(
-        "homeassistant.components.tplink.Discover.discover_single"
+    with (
+        patch("homeassistant.components.tplink.Discover.discover") as discover,
+        patch("homeassistant.components.tplink.Discover.discover_single"),
     ):
         discover.return_value = {MagicMock(): MagicMock()}
         await async_setup_component(hass, tplink.DOMAIN, {tplink.DOMAIN: {}})

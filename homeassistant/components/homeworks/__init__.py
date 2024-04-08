@@ -1,4 +1,5 @@
 """Support for Lutron Homeworks Series 4 and 8 systems."""
+
 import logging
 
 from pyhomeworks.pyhomeworks import HW_BUTTON_PRESSED, HW_BUTTON_RELEASED, Homeworks

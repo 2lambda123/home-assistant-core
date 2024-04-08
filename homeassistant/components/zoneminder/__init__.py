@@ -1,4 +1,5 @@
 """Support for ZoneMinder."""
+
 import logging
 
 import voluptuous as vol

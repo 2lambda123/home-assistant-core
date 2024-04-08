@@ -1,4 +1,5 @@
 """The Goal Zero Yeti integration."""
+
 from __future__ import annotations
 
 from goalzero import Yeti, exceptions

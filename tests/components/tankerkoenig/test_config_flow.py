@@ -1,4 +1,5 @@
 """Tests for Tankerkoenig config flow."""
+
 from unittest.mock import patch
 
 from pytankerkoenig import customException
@@ -78,11 +79,14 @@ async def test_user(hass: HomeAssistant) -> None:
     assert result["type"] == FlowResultType.FORM
     assert result["step_id"] == "user"
 
-    with patch(
-        "homeassistant.components.tankerkoenig.async_setup_entry", return_value=True
-    ) as mock_setup_entry, patch(
-        "homeassistant.components.tankerkoenig.config_flow.getNearbyStations",
-        return_value=MOCK_NEARVY_STATIONS_OK,
+    with (
+        patch(
+            "homeassistant.components.tankerkoenig.async_setup_entry", return_value=True
+        ) as mock_setup_entry,
+        patch(
+            "homeassistant.components.tankerkoenig.config_flow.getNearbyStations",
+            return_value=MOCK_NEARVY_STATIONS_OK,
+        ),
     ):
         result = await hass.config_entries.flow.async_configure(
             result["flow_id"], user_input=MOCK_USER_DATA
@@ -184,11 +188,14 @@ async def test_reauth(hass: HomeAssistant) -> None:
     )
     mock_config.add_to_hass(hass)
 
-    with patch(
-        "homeassistant.components.tankerkoenig.async_setup_entry", return_value=True
-    ) as mock_setup_entry, patch(
-        "homeassistant.components.tankerkoenig.config_flow.getNearbyStations",
-    ) as mock_nearby_stations:
+    with (
+        patch(
+            "homeassistant.components.tankerkoenig.async_setup_entry", return_value=True
+        ) as mock_setup_entry,
+        patch(
+            "homeassistant.components.tankerkoenig.config_flow.getNearbyStations",
+        ) as mock_nearby_stations,
+    ):
         # re-auth initialized
         result = await hass.config_entries.flow.async_init(
             DOMAIN,
@@ -238,11 +245,14 @@ async def test_options_flow(hass: HomeAssistant) -> None:
     )
     mock_config.add_to_hass(hass)
 
-    with patch(
-        "homeassistant.components.tankerkoenig.async_setup_entry", return_value=True
-    ) as mock_setup_entry, patch(
-        "homeassistant.components.tankerkoenig.config_flow.getNearbyStations",
-        return_value=MOCK_NEARVY_STATIONS_OK,
+    with (
+        patch(
+            "homeassistant.components.tankerkoenig.async_setup_entry", return_value=True
+        ) as mock_setup_entry,
+        patch(
+            "homeassistant.components.tankerkoenig.config_flow.getNearbyStations",
+            return_value=MOCK_NEARVY_STATIONS_OK,
+        ),
     ):
         await hass.config_entries.async_setup(mock_config.entry_id)
         await hass.async_block_till_done()

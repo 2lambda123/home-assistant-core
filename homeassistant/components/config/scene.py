@@ -1,4 +1,5 @@
 """Provide configuration end points for Scenes."""
+
 import uuid
 
 from homeassistant.components.scene import DOMAIN, PLATFORM_SCHEMA

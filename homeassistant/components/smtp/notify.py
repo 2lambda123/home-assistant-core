@@ -1,4 +1,5 @@
 """Mail (SMTP) notification service."""
+
 from __future__ import annotations
 
 from email.mime.application import MIMEApplication
@@ -290,9 +291,9 @@ def _attach_file(hass, atch_name, content_id=""):
             atch_name,
         )
         attachment = MIMEApplication(file_bytes, Name=os.path.basename(atch_name))
-        attachment[
-            "Content-Disposition"
-        ] = f'attachment; filename="{os.path.basename(atch_name)}"'
+        attachment["Content-Disposition"] = (
+            f'attachment; filename="{os.path.basename(atch_name)}"'
+        )
     else:
         if content_id:
             attachment.add_header("Content-ID", f"<{content_id}>")

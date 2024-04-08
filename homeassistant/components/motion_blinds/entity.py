@@ -1,4 +1,5 @@
 """Support for Motion Blinds using their WLAN API."""
+
 from __future__ import annotations
 
 from motionblinds import DEVICE_TYPES_GATEWAY, DEVICE_TYPES_WIFI, MotionGateway

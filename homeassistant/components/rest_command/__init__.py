@@ -1,4 +1,5 @@
 """Support for exposing regular REST commands as services."""
+
 from http import HTTPStatus
 import logging
 

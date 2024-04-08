@@ -1,4 +1,5 @@
 """Helpers for listening to events."""
+
 from __future__ import annotations
 
 import asyncio
@@ -388,9 +389,9 @@ def _async_track_event(
 
     hass_data = hass.data
 
-    callbacks: dict[
-        str, list[HassJob[[EventType[_TypedDictT]], Any]]
-    ] | None = hass_data.get(callbacks_key)
+    callbacks: dict[str, list[HassJob[[EventType[_TypedDictT]], Any]]] | None = (
+        hass_data.get(callbacks_key)
+    )
     if not callbacks:
         callbacks = hass_data[callbacks_key] = {}
 

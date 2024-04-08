@@ -1,4 +1,5 @@
 """Config flow for HomeKit integration."""
+
 from __future__ import annotations
 
 from collections.abc import Iterable
@@ -408,9 +409,9 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
             entity_config = self.hk_options[CONF_ENTITY_CONFIG]
             for entity_id in self.included_cameras:
                 if entity_id in user_input[CONF_CAMERA_COPY]:
-                    entity_config.setdefault(entity_id, {})[
-                        CONF_VIDEO_CODEC
-                    ] = VIDEO_CODEC_COPY
+                    entity_config.setdefault(entity_id, {})[CONF_VIDEO_CODEC] = (
+                        VIDEO_CODEC_COPY
+                    )
                 elif (
                     entity_id in entity_config
                     and CONF_VIDEO_CODEC in entity_config[entity_id]

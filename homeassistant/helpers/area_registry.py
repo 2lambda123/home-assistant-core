@@ -1,4 +1,5 @@
 """Provide a way to connect devices to one physical location."""
+
 from __future__ import annotations
 
 from collections import OrderedDict
@@ -216,9 +217,9 @@ class AreaRegistry:
 
         new = self.areas[area_id] = attr.evolve(old, **new_values)  # type: ignore[arg-type]
         if normalized_name is not None:
-            self._normalized_name_area_idx[
-                normalized_name
-            ] = self._normalized_name_area_idx.pop(old.normalized_name)
+            self._normalized_name_area_idx[normalized_name] = (
+                self._normalized_name_area_idx.pop(old.normalized_name)
+            )
 
         self.async_schedule_save()
         return new

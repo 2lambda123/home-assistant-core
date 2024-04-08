@@ -1,4 +1,5 @@
 """Test DROP coordinator."""
+
 from homeassistant.components.drop_connect.const import DOMAIN
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import STATE_UNAVAILABLE, STATE_UNKNOWN

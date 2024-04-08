@@ -1,4 +1,5 @@
 """Define fixtures for Notion tests."""
+
 from collections.abc import Generator
 import json
 from unittest.mock import AsyncMock, Mock, patch
@@ -98,12 +99,15 @@ def get_client_fixture(client):
 @pytest.fixture(name="mock_aionotion")
 async def mock_aionotion_fixture(client):
     """Define a fixture to patch aionotion."""
-    with patch(
-        "homeassistant.components.notion.async_get_client",
-        AsyncMock(return_value=client),
-    ), patch(
-        "homeassistant.components.notion.config_flow.async_get_client",
-        AsyncMock(return_value=client),
+    with (
+        patch(
+            "homeassistant.components.notion.async_get_client",
+            AsyncMock(return_value=client),
+        ),
+        patch(
+            "homeassistant.components.notion.config_flow.async_get_client",
+            AsyncMock(return_value=client),
+        ),
     ):
         yield
 

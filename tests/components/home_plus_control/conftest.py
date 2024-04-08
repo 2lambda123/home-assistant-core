@@ -1,4 +1,5 @@
 """Test setup and fixtures for component Home+ Control by Legrand."""
+
 from homepluscontrol.homeplusinteractivemodule import HomePlusInteractiveModule
 from homepluscontrol.homeplusplant import HomePlusPlant
 import pytest

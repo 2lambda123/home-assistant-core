@@ -1,4 +1,5 @@
 """Tests for honeywell config flow."""
+
 import asyncio
 from unittest.mock import MagicMock, patch
 

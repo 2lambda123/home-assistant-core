@@ -31,10 +31,13 @@ async def test_load_unload_entry(hass: HomeAssistant) -> None:
 
 async def test_config_not_ready(hass: HomeAssistant) -> None:
     """Tests if ConfigEntryNotReady is raised when connect raises a WebsocketError."""
-    with patch(
-        "bluecurrent_api.Client.connect",
-        side_effect=WebsocketError,
-    ), pytest.raises(ConfigEntryNotReady):
+    with (
+        patch(
+            "bluecurrent_api.Client.connect",
+            side_effect=WebsocketError,
+        ),
+        pytest.raises(ConfigEntryNotReady),
+    ):
         config_entry = MockConfigEntry(
             domain=DOMAIN,
             entry_id="uuid",
@@ -159,13 +162,17 @@ async def test_start_loop(hass: HomeAssistant) -> None:
 async def test_reconnect(hass: HomeAssistant) -> None:
     """Tests reconnect."""
 
-    with patch("bluecurrent_api.Client.connect"), patch(
-        "bluecurrent_api.Client.connect", side_effect=WebsocketError
-    ), patch(
-        "bluecurrent_api.Client.get_next_reset_delta", return_value=timedelta(hours=1)
-    ), patch(
-        "homeassistant.components.blue_current.async_call_later"
-    ) as test_async_call_later:
+    with (
+        patch("bluecurrent_api.Client.connect"),
+        patch("bluecurrent_api.Client.connect", side_effect=WebsocketError),
+        patch(
+            "bluecurrent_api.Client.get_next_reset_delta",
+            return_value=timedelta(hours=1),
+        ),
+        patch(
+            "homeassistant.components.blue_current.async_call_later"
+        ) as test_async_call_later,
+    ):
         config_entry = MockConfigEntry(
             domain=DOMAIN,
             entry_id="uuid",

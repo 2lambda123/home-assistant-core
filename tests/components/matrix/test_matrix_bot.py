@@ -1,4 +1,5 @@
 """Configure and test MatrixBot."""
+
 from nio import MatrixRoom, RoomMessageText
 
 from homeassistant.components.matrix import (

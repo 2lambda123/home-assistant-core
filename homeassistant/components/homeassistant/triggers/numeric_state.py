@@ -1,4 +1,5 @@
 """Offer numeric state listening automation rules."""
+
 import logging
 
 import voluptuous as vol

@@ -1,4 +1,5 @@
 """The tests for the hassio component."""
+
 import asyncio
 from http import HTTPStatus
 from unittest.mock import patch

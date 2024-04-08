@@ -1,4 +1,5 @@
 """Test Google Assistant helpers."""
+
 from datetime import timedelta
 from http import HTTPStatus
 from typing import Any

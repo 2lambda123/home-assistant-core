@@ -1,4 +1,5 @@
 """Test Netgear LTE integration."""
+
 from homeassistant.components.netgear_lte.const import DOMAIN
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.core import HomeAssistant

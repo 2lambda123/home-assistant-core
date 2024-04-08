@@ -1,4 +1,5 @@
 """Helpers for Toon."""
+
 import logging
 
 from toonapi import ToonConnectionError, ToonError
