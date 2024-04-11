@@ -1,4 +1,5 @@
 """Test ZHA switch."""
+
 from unittest.mock import call, patch
 
 import pytest

@@ -1,4 +1,5 @@
 """The tests for the august platform."""
+
 import asyncio
 from unittest.mock import Mock, patch
 

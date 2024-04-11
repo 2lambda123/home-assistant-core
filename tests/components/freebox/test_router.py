@@ -1,4 +1,5 @@
 """Tests for the Freebox utility methods."""
+
 import json
 
 from homeassistant.components.freebox.router import is_json

@@ -1,4 +1,5 @@
 """Config flow for Home Assistant Supervisor integration."""
+
 import logging
 
 from homeassistant import config_entries

@@ -1,4 +1,5 @@
 """Shared constants."""
+
 from homeassistant.components import vacuum
 
 MQTT_VACUUM_ATTRIBUTES_BLOCKED = frozenset(

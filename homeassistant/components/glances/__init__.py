@@ -1,4 +1,5 @@
 """The Glances component."""
+
 from typing import Any
 
 from glances_api import Glances

@@ -1,4 +1,5 @@
 """Support for Wyoming wake-word-detection services."""
+
 import asyncio
 from collections.abc import AsyncIterable
 import logging

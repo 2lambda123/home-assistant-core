@@ -1,4 +1,5 @@
 """Test ZHA sensor."""
+
 import math
 from unittest.mock import MagicMock, patch
 

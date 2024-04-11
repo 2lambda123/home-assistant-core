@@ -1,4 +1,5 @@
 """The tests for the Proximity component."""
+
 from homeassistant.components.proximity import DOMAIN
 from homeassistant.core import HomeAssistant
 from homeassistant.setup import async_setup_component

@@ -1,4 +1,5 @@
 """Test to verify that we can load components."""
+
 from unittest.mock import patch
 
 import pytest
@@ -177,13 +178,21 @@ async def test_get_integration_exceptions(hass: HomeAssistant) -> None:
     """Test resolving integration."""
     integration = await loader.async_get_integration(hass, "hue")
 
-    with pytest.raises(ImportError), patch(
-        "homeassistant.loader.importlib.import_module", side_effect=ValueError("Boom")
+    with (
+        pytest.raises(ImportError),
+        patch(
+            "homeassistant.loader.importlib.import_module",
+            side_effect=ValueError("Boom"),
+        ),
     ):
         assert hue == integration.get_component()
 
-    with pytest.raises(ImportError), patch(
-        "homeassistant.loader.importlib.import_module", side_effect=ValueError("Boom")
+    with (
+        pytest.raises(ImportError),
+        patch(
+            "homeassistant.loader.importlib.import_module",
+            side_effect=ValueError("Boom"),
+        ),
     ):
         assert hue_light == integration.get_platform("light")
 

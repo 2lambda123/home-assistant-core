@@ -1,4 +1,5 @@
 """Test Wyoming satellite."""
+
 from __future__ import annotations
 
 import asyncio
@@ -161,17 +162,22 @@ async def test_satellite_pipeline(hass: HomeAssistant) -> None:
         ).event(),
     ]
 
-    with patch(
-        "homeassistant.components.wyoming.data.load_wyoming_info",
-        return_value=SATELLITE_INFO,
-    ), patch(
-        "homeassistant.components.wyoming.satellite.AsyncTcpClient",
-        SatelliteAsyncTcpClient(events),
-    ) as mock_client, patch(
-        "homeassistant.components.wyoming.satellite.assist_pipeline.async_pipeline_from_audio_stream",
-    ) as mock_run_pipeline, patch(
-        "homeassistant.components.wyoming.satellite.tts.async_get_media_source_audio",
-        return_value=("wav", get_test_wav()),
+    with (
+        patch(
+            "homeassistant.components.wyoming.data.load_wyoming_info",
+            return_value=SATELLITE_INFO,
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.AsyncTcpClient",
+            SatelliteAsyncTcpClient(events),
+        ) as mock_client,
+        patch(
+            "homeassistant.components.wyoming.satellite.assist_pipeline.async_pipeline_from_audio_stream",
+        ) as mock_run_pipeline,
+        patch(
+            "homeassistant.components.wyoming.satellite.tts.async_get_media_source_audio",
+            return_value=("wav", get_test_wav()),
+        ),
     ):
         entry = await setup_config_entry(hass)
         device: SatelliteDevice = hass.data[wyoming.DOMAIN][
@@ -330,14 +336,16 @@ async def test_satellite_muted(hass: HomeAssistant) -> None:
         self.device.set_is_muted(False)
         on_muted_event.set()
 
-    with patch(
-        "homeassistant.components.wyoming.data.load_wyoming_info",
-        return_value=SATELLITE_INFO,
-    ), patch(
-        "homeassistant.components.wyoming._make_satellite", make_muted_satellite
-    ), patch(
-        "homeassistant.components.wyoming.satellite.WyomingSatellite.on_muted",
-        on_muted,
+    with (
+        patch(
+            "homeassistant.components.wyoming.data.load_wyoming_info",
+            return_value=SATELLITE_INFO,
+        ),
+        patch("homeassistant.components.wyoming._make_satellite", make_muted_satellite),
+        patch(
+            "homeassistant.components.wyoming.satellite.WyomingSatellite.on_muted",
+            on_muted,
+        ),
     ):
         await setup_config_entry(hass)
         async with asyncio.timeout(1):
@@ -352,15 +360,19 @@ async def test_satellite_restart(hass: HomeAssistant) -> None:
         self.stop()
         on_restart_event.set()
 
-    with patch(
-        "homeassistant.components.wyoming.data.load_wyoming_info",
-        return_value=SATELLITE_INFO,
-    ), patch(
-        "homeassistant.components.wyoming.satellite.WyomingSatellite._run_once",
-        side_effect=RuntimeError(),
-    ), patch(
-        "homeassistant.components.wyoming.satellite.WyomingSatellite.on_restart",
-        on_restart,
+    with (
+        patch(
+            "homeassistant.components.wyoming.data.load_wyoming_info",
+            return_value=SATELLITE_INFO,
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.WyomingSatellite._run_once",
+            side_effect=RuntimeError(),
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.WyomingSatellite.on_restart",
+            on_restart,
+        ),
     ):
         await setup_config_entry(hass)
         async with asyncio.timeout(1):
@@ -383,18 +395,23 @@ async def test_satellite_reconnect(hass: HomeAssistant) -> None:
     async def on_stopped(self):
         stopped_event.set()
 
-    with patch(
-        "homeassistant.components.wyoming.data.load_wyoming_info",
-        return_value=SATELLITE_INFO,
-    ), patch(
-        "homeassistant.components.wyoming.satellite.AsyncTcpClient.connect",
-        side_effect=ConnectionRefusedError(),
-    ), patch(
-        "homeassistant.components.wyoming.satellite.WyomingSatellite.on_reconnect",
-        on_reconnect,
-    ), patch(
-        "homeassistant.components.wyoming.satellite.WyomingSatellite.on_stopped",
-        on_stopped,
+    with (
+        patch(
+            "homeassistant.components.wyoming.data.load_wyoming_info",
+            return_value=SATELLITE_INFO,
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.AsyncTcpClient.connect",
+            side_effect=ConnectionRefusedError(),
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.WyomingSatellite.on_reconnect",
+            on_reconnect,
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.WyomingSatellite.on_stopped",
+            on_stopped,
+        ),
     ):
         await setup_config_entry(hass)
         async with asyncio.timeout(1):
@@ -410,17 +427,22 @@ async def test_satellite_disconnect_before_pipeline(hass: HomeAssistant) -> None
         self.stop()
         on_restart_event.set()
 
-    with patch(
-        "homeassistant.components.wyoming.data.load_wyoming_info",
-        return_value=SATELLITE_INFO,
-    ), patch(
-        "homeassistant.components.wyoming.satellite.AsyncTcpClient",
-        MockAsyncTcpClient([]),  # no RunPipeline event
-    ), patch(
-        "homeassistant.components.wyoming.satellite.assist_pipeline.async_pipeline_from_audio_stream",
-    ) as mock_run_pipeline, patch(
-        "homeassistant.components.wyoming.satellite.WyomingSatellite.on_restart",
-        on_restart,
+    with (
+        patch(
+            "homeassistant.components.wyoming.data.load_wyoming_info",
+            return_value=SATELLITE_INFO,
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.AsyncTcpClient",
+            MockAsyncTcpClient([]),  # no RunPipeline event
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.assist_pipeline.async_pipeline_from_audio_stream",
+        ) as mock_run_pipeline,
+        patch(
+            "homeassistant.components.wyoming.satellite.WyomingSatellite.on_restart",
+            on_restart,
+        ),
     ):
         await setup_config_entry(hass)
         async with asyncio.timeout(1):
@@ -450,20 +472,26 @@ async def test_satellite_disconnect_during_pipeline(hass: HomeAssistant) -> None
     async def on_stopped(self):
         on_stopped_event.set()
 
-    with patch(
-        "homeassistant.components.wyoming.data.load_wyoming_info",
-        return_value=SATELLITE_INFO,
-    ), patch(
-        "homeassistant.components.wyoming.satellite.AsyncTcpClient",
-        MockAsyncTcpClient(events),
-    ), patch(
-        "homeassistant.components.wyoming.satellite.assist_pipeline.async_pipeline_from_audio_stream",
-    ) as mock_run_pipeline, patch(
-        "homeassistant.components.wyoming.satellite.WyomingSatellite.on_restart",
-        on_restart,
-    ), patch(
-        "homeassistant.components.wyoming.satellite.WyomingSatellite.on_stopped",
-        on_stopped,
+    with (
+        patch(
+            "homeassistant.components.wyoming.data.load_wyoming_info",
+            return_value=SATELLITE_INFO,
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.AsyncTcpClient",
+            MockAsyncTcpClient(events),
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.assist_pipeline.async_pipeline_from_audio_stream",
+        ) as mock_run_pipeline,
+        patch(
+            "homeassistant.components.wyoming.satellite.WyomingSatellite.on_restart",
+            on_restart,
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.WyomingSatellite.on_stopped",
+            on_stopped,
+        ),
     ):
         entry = await setup_config_entry(hass)
         device: SatelliteDevice = hass.data[wyoming.DOMAIN][
@@ -489,15 +517,19 @@ async def test_satellite_error_during_pipeline(hass: HomeAssistant) -> None:
         ).event(),
     ]  # no audio chunks after RunPipeline
 
-    with patch(
-        "homeassistant.components.wyoming.data.load_wyoming_info",
-        return_value=SATELLITE_INFO,
-    ), patch(
-        "homeassistant.components.wyoming.satellite.AsyncTcpClient",
-        SatelliteAsyncTcpClient(events),
-    ) as mock_client, patch(
-        "homeassistant.components.wyoming.satellite.assist_pipeline.async_pipeline_from_audio_stream",
-    ) as mock_run_pipeline:
+    with (
+        patch(
+            "homeassistant.components.wyoming.data.load_wyoming_info",
+            return_value=SATELLITE_INFO,
+        ),
+        patch(
+            "homeassistant.components.wyoming.satellite.AsyncTcpClient",
+            SatelliteAsyncTcpClient(events),
+        ) as mock_client,
+        patch(
+            "homeassistant.components.wyoming.satellite.assist_pipeline.async_pipeline_from_audio_stream",
+        ) as mock_run_pipeline,
+    ):
         await setup_config_entry(hass)
 
         async with asyncio.timeout(1):

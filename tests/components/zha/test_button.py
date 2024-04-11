@@ -1,4 +1,5 @@
 """Test ZHA button."""
+
 from unittest.mock import call, patch
 
 from freezegun import freeze_time

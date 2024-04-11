@@ -1,4 +1,5 @@
 """Test conversation triggers."""
+
 import pytest
 import voluptuous as vol
 

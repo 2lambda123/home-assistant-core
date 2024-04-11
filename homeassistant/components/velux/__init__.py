@@ -1,4 +1,5 @@
 """Support for VELUX KLF 200 devices."""
+
 import logging
 
 from pyvlx import Node, PyVLX, PyVLXException

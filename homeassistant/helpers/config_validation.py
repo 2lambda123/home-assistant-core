@@ -1,4 +1,5 @@
 """Helpers for config validation using voluptuous."""
+
 from __future__ import annotations
 
 from collections.abc import Callable, Hashable
@@ -280,18 +281,15 @@ def isdir(value: Any) -> str:
 
 
 @overload
-def ensure_list(value: None) -> list[Any]:
-    ...
+def ensure_list(value: None) -> list[Any]: ...
 
 
 @overload
-def ensure_list(value: list[_T]) -> list[_T]:
-    ...
+def ensure_list(value: list[_T]) -> list[_T]: ...
 
 
 @overload
-def ensure_list(value: list[_T] | _T) -> list[_T]:
-    ...
+def ensure_list(value: list[_T] | _T) -> list[_T]: ...
 
 
 def ensure_list(value: _T | None) -> list[_T] | list[Any]:

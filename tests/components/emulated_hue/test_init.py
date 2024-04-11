@@ -1,4 +1,5 @@
 """Test the Emulated Hue component."""
+
 from datetime import timedelta
 from typing import Any
 from unittest.mock import AsyncMock, patch
@@ -130,11 +131,12 @@ def test_config_alexa_entity_id_to_number() -> None:
 async def test_setup_works(hass: HomeAssistant) -> None:
     """Test setup works."""
     hass.config.components.add("network")
-    with patch(
-        "homeassistant.components.emulated_hue.async_create_upnp_datagram_endpoint",
-        AsyncMock(),
-    ) as mock_create_upnp_datagram_endpoint, patch(
-        "homeassistant.components.emulated_hue.async_get_source_ip"
+    with (
+        patch(
+            "homeassistant.components.emulated_hue.async_create_upnp_datagram_endpoint",
+            AsyncMock(),
+        ) as mock_create_upnp_datagram_endpoint,
+        patch("homeassistant.components.emulated_hue.async_get_source_ip"),
     ):
         mock_create_upnp_datagram_endpoint.return_value = AsyncMock(
             spec=UPNPResponderProtocol

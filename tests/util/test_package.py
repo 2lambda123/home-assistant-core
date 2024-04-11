@@ -1,4 +1,5 @@
 """Test Home Assistant package util methods."""
+
 import asyncio
 from importlib.metadata import PackageNotFoundError, metadata
 import logging
@@ -258,9 +259,12 @@ def test_check_package_previous_failed_install() -> None:
     installed_package = pkg["name"]
     installed_version = pkg["version"]
 
-    with patch(
-        "homeassistant.util.package.distribution",
-        side_effect=PackageNotFoundError,
-    ), patch("homeassistant.util.package.version", return_value=None):
+    with (
+        patch(
+            "homeassistant.util.package.distribution",
+            side_effect=PackageNotFoundError,
+        ),
+        patch("homeassistant.util.package.version", return_value=None),
+    ):
         assert not package.is_installed(installed_package)
         assert not package.is_installed(f"{installed_package}=={installed_version}")

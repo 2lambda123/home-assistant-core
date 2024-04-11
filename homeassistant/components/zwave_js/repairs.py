@@ -1,4 +1,5 @@
 """Repairs for Z-Wave JS."""
+
 from __future__ import annotations
 
 import voluptuous as vol

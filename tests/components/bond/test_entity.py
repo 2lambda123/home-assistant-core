@@ -1,4 +1,5 @@
 """Tests for the Bond entities."""
+
 import asyncio
 from datetime import timedelta
 from unittest.mock import patch

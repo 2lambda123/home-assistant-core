@@ -1,4 +1,5 @@
 """Provide configuration end points for scripts."""
+
 from homeassistant.components.script import DOMAIN
 from homeassistant.components.script.config import (
     SCRIPT_ENTITY_SCHEMA,

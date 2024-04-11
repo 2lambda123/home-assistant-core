@@ -1,4 +1,5 @@
 """Config flow for Nightscout integration."""
+
 import logging
 
 from aiohttp import ClientError, ClientResponseError

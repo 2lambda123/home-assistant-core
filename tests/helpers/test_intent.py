@@ -1,4 +1,5 @@
 """Tests for the intent helpers."""
+
 import asyncio
 from unittest.mock import MagicMock, patch
 

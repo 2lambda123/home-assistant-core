@@ -1,4 +1,5 @@
 """Tests for the telegram_bot integration."""
+
 from unittest.mock import patch
 
 import pytest
@@ -55,12 +56,15 @@ def config_polling():
 @pytest.fixture
 def mock_register_webhook():
     """Mock calls made by telegram_bot when (de)registering webhook."""
-    with patch(
-        "homeassistant.components.telegram_bot.webhooks.PushBot.register_webhook",
-        return_value=True,
-    ), patch(
-        "homeassistant.components.telegram_bot.webhooks.PushBot.deregister_webhook",
-        return_value=True,
+    with (
+        patch(
+            "homeassistant.components.telegram_bot.webhooks.PushBot.register_webhook",
+            return_value=True,
+        ),
+        patch(
+            "homeassistant.components.telegram_bot.webhooks.PushBot.deregister_webhook",
+            return_value=True,
+        ),
     ):
         yield
 

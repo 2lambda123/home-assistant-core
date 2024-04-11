@@ -1,4 +1,5 @@
 """Test tts."""
+
 from __future__ import annotations
 
 from unittest.mock import patch
@@ -27,10 +28,13 @@ async def test_load_info_oserror(hass: HomeAssistant) -> None:
     """Test loading info and error raising."""
     mock_client = MockAsyncTcpClient([STT_INFO.event()])
 
-    with patch(
-        "homeassistant.components.wyoming.data.AsyncTcpClient",
-        mock_client,
-    ), patch.object(mock_client, "read_event", side_effect=OSError("Boom!")):
+    with (
+        patch(
+            "homeassistant.components.wyoming.data.AsyncTcpClient",
+            mock_client,
+        ),
+        patch.object(mock_client, "read_event", side_effect=OSError("Boom!")),
+    ):
         info = await load_wyoming_info(
             "localhost",
             1234,

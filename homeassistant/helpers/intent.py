@@ -1,4 +1,5 @@
 """Module to coordinate user intentions."""
+
 from __future__ import annotations
 
 import asyncio

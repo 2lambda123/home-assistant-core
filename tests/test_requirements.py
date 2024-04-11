@@ -1,4 +1,5 @@
 """Test requirements module."""
+
 import logging
 import os
 from unittest.mock import call, patch
@@ -27,11 +28,15 @@ def env_without_wheel_links():
 
 async def test_requirement_installed_in_venv(hass: HomeAssistant) -> None:
     """Test requirement installed in virtual environment."""
-    with patch("os.path.dirname", return_value="ha_package_path"), patch(
-        "homeassistant.util.package.is_virtual_env", return_value=True
-    ), patch("homeassistant.util.package.is_docker_env", return_value=False), patch(
-        "homeassistant.util.package.install_package", return_value=True
-    ) as mock_install, patch.dict(os.environ, env_without_wheel_links(), clear=True):
+    with (
+        patch("os.path.dirname", return_value="ha_package_path"),
+        patch("homeassistant.util.package.is_virtual_env", return_value=True),
+        patch("homeassistant.util.package.is_docker_env", return_value=False),
+        patch(
+            "homeassistant.util.package.install_package", return_value=True
+        ) as mock_install,
+        patch.dict(os.environ, env_without_wheel_links(), clear=True),
+    ):
         hass.config.skip_pip = False
         mock_integration(hass, MockModule("comp", requirements=["package==0.0.1"]))
         assert await setup.async_setup_component(hass, "comp", {})
@@ -45,11 +50,15 @@ async def test_requirement_installed_in_venv(hass: HomeAssistant) -> None:
 
 async def test_requirement_installed_in_deps(hass: HomeAssistant) -> None:
     """Test requirement installed in deps directory."""
-    with patch("os.path.dirname", return_value="ha_package_path"), patch(
-        "homeassistant.util.package.is_virtual_env", return_value=False
-    ), patch("homeassistant.util.package.is_docker_env", return_value=False), patch(
-        "homeassistant.util.package.install_package", return_value=True
-    ) as mock_install, patch.dict(os.environ, env_without_wheel_links(), clear=True):
+    with (
+        patch("os.path.dirname", return_value="ha_package_path"),
+        patch("homeassistant.util.package.is_virtual_env", return_value=False),
+        patch("homeassistant.util.package.is_docker_env", return_value=False),
+        patch(
+            "homeassistant.util.package.install_package", return_value=True
+        ) as mock_install,
+        patch.dict(os.environ, env_without_wheel_links(), clear=True),
+    ):
         hass.config.skip_pip = False
         mock_integration(hass, MockModule("comp", requirements=["package==0.0.1"]))
         assert await setup.async_setup_component(hass, "comp", {})
@@ -71,9 +80,10 @@ async def test_install_existing_package(hass: HomeAssistant) -> None:
 
     assert len(mock_inst.mock_calls) == 1
 
-    with patch("homeassistant.util.package.is_installed", return_value=True), patch(
-        "homeassistant.util.package.install_package"
-    ) as mock_inst:
+    with (
+        patch("homeassistant.util.package.is_installed", return_value=True),
+        patch("homeassistant.util.package.install_package") as mock_inst,
+    ):
         await async_process_requirements(hass, "test_component", ["hello==1.0.0"])
 
     assert len(mock_inst.mock_calls) == 0
@@ -81,9 +91,12 @@ async def test_install_existing_package(hass: HomeAssistant) -> None:
 
 async def test_install_missing_package(hass: HomeAssistant) -> None:
     """Test an install attempt on an existing package."""
-    with patch(
-        "homeassistant.util.package.install_package", return_value=False
-    ) as mock_inst, pytest.raises(RequirementsNotFound):
+    with (
+        patch(
+            "homeassistant.util.package.install_package", return_value=False
+        ) as mock_inst,
+        pytest.raises(RequirementsNotFound),
+    ):
         await async_process_requirements(hass, "test_component", ["hello==1.0.0"])
 
     assert len(mock_inst.mock_calls) == 3
@@ -130,11 +143,14 @@ async def test_get_integration_with_requirements(hass: HomeAssistant) -> None:
         ),
     )
 
-    with patch(
-        "homeassistant.util.package.is_installed", return_value=False
-    ) as mock_is_installed, patch(
-        "homeassistant.util.package.install_package", return_value=True
-    ) as mock_inst:
+    with (
+        patch(
+            "homeassistant.util.package.is_installed", return_value=False
+        ) as mock_is_installed,
+        patch(
+            "homeassistant.util.package.install_package", return_value=True
+        ) as mock_inst,
+    ):
         integration = await async_get_integration_with_requirements(
             hass, "test_component"
         )
@@ -186,11 +202,16 @@ async def test_get_integration_with_requirements_pip_install_fails_two_passes(
         return False
 
     # 1st pass
-    with pytest.raises(RequirementsNotFound), patch(
-        "homeassistant.util.package.is_installed", return_value=False
-    ) as mock_is_installed, patch(
-        "homeassistant.util.package.install_package", side_effect=_mock_install_package
-    ) as mock_inst:
+    with (
+        pytest.raises(RequirementsNotFound),
+        patch(
+            "homeassistant.util.package.is_installed", return_value=False
+        ) as mock_is_installed,
+        patch(
+            "homeassistant.util.package.install_package",
+            side_effect=_mock_install_package,
+        ) as mock_inst,
+    ):
         integration = await async_get_integration_with_requirements(
             hass, "test_component"
         )
@@ -216,11 +237,16 @@ async def test_get_integration_with_requirements_pip_install_fails_two_passes(
     ]
 
     # 2nd pass
-    with pytest.raises(RequirementsNotFound), patch(
-        "homeassistant.util.package.is_installed", return_value=False
-    ) as mock_is_installed, patch(
-        "homeassistant.util.package.install_package", side_effect=_mock_install_package
-    ) as mock_inst:
+    with (
+        pytest.raises(RequirementsNotFound),
+        patch(
+            "homeassistant.util.package.is_installed", return_value=False
+        ) as mock_is_installed,
+        patch(
+            "homeassistant.util.package.install_package",
+            side_effect=_mock_install_package,
+        ) as mock_inst,
+    ):
         integration = await async_get_integration_with_requirements(
             hass, "test_component"
         )
@@ -234,11 +260,16 @@ async def test_get_integration_with_requirements_pip_install_fails_two_passes(
     # Now clear the history and so we try again
     async_clear_install_history(hass)
 
-    with pytest.raises(RequirementsNotFound), patch(
-        "homeassistant.util.package.is_installed", return_value=False
-    ) as mock_is_installed, patch(
-        "homeassistant.util.package.install_package", side_effect=_mock_install_package
-    ) as mock_inst:
+    with (
+        pytest.raises(RequirementsNotFound),
+        patch(
+            "homeassistant.util.package.is_installed", return_value=False
+        ) as mock_is_installed,
+        patch(
+            "homeassistant.util.package.install_package",
+            side_effect=_mock_install_package,
+        ) as mock_inst,
+    ):
         integration = await async_get_integration_with_requirements(
             hass, "test_component"
         )
@@ -264,11 +295,14 @@ async def test_get_integration_with_requirements_pip_install_fails_two_passes(
     # Now clear the history and mock success
     async_clear_install_history(hass)
 
-    with patch(
-        "homeassistant.util.package.is_installed", return_value=False
-    ) as mock_is_installed, patch(
-        "homeassistant.util.package.install_package", return_value=True
-    ) as mock_inst:
+    with (
+        patch(
+            "homeassistant.util.package.is_installed", return_value=False
+        ) as mock_is_installed,
+        patch(
+            "homeassistant.util.package.install_package", return_value=True
+        ) as mock_inst,
+    ):
         integration = await async_get_integration_with_requirements(
             hass, "test_component"
         )
@@ -360,13 +394,15 @@ async def test_install_with_wheels_index(hass: HomeAssistant) -> None:
     hass.config.skip_pip = False
     mock_integration(hass, MockModule("comp", requirements=["hello==1.0.0"]))
 
-    with patch("homeassistant.util.package.is_installed", return_value=False), patch(
-        "homeassistant.util.package.is_docker_env", return_value=True
-    ), patch("homeassistant.util.package.install_package") as mock_inst, patch.dict(
-        os.environ, {"WHEELS_LINKS": "https://wheels.hass.io/test"}
-    ), patch(
-        "os.path.dirname",
-    ) as mock_dir:
+    with (
+        patch("homeassistant.util.package.is_installed", return_value=False),
+        patch("homeassistant.util.package.is_docker_env", return_value=True),
+        patch("homeassistant.util.package.install_package") as mock_inst,
+        patch.dict(os.environ, {"WHEELS_LINKS": "https://wheels.hass.io/test"}),
+        patch(
+            "os.path.dirname",
+        ) as mock_dir,
+    ):
         mock_dir.return_value = "ha_package_path"
         assert await setup.async_setup_component(hass, "comp", {})
         assert "comp" in hass.config.components
@@ -383,11 +419,13 @@ async def test_install_on_docker(hass: HomeAssistant) -> None:
     hass.config.skip_pip = False
     mock_integration(hass, MockModule("comp", requirements=["hello==1.0.0"]))
 
-    with patch("homeassistant.util.package.is_installed", return_value=False), patch(
-        "homeassistant.util.package.is_docker_env", return_value=True
-    ), patch("homeassistant.util.package.install_package") as mock_inst, patch(
-        "os.path.dirname"
-    ) as mock_dir, patch.dict(os.environ, env_without_wheel_links(), clear=True):
+    with (
+        patch("homeassistant.util.package.is_installed", return_value=False),
+        patch("homeassistant.util.package.is_docker_env", return_value=True),
+        patch("homeassistant.util.package.install_package") as mock_inst,
+        patch("os.path.dirname") as mock_dir,
+        patch.dict(os.environ, env_without_wheel_links(), clear=True),
+    ):
         mock_dir.return_value = "ha_package_path"
         assert await setup.async_setup_component(hass, "comp", {})
         assert "comp" in hass.config.components

@@ -1,4 +1,5 @@
 """Test configuration for Shelly."""
+
 from __future__ import annotations
 
 from unittest.mock import AsyncMock, Mock, PropertyMock, patch
@@ -326,8 +327,9 @@ def _mock_rpc_device(version: str | None = None):
 @pytest.fixture
 async def mock_rpc_device():
     """Mock rpc (Gen2, Websocket) device with BLE support."""
-    with patch("aioshelly.rpc_device.RpcDevice.create") as rpc_device_mock, patch(
-        "homeassistant.components.shelly.bluetooth.async_start_scanner"
+    with (
+        patch("aioshelly.rpc_device.RpcDevice.create") as rpc_device_mock,
+        patch("homeassistant.components.shelly.bluetooth.async_start_scanner"),
     ):
 
         def update():

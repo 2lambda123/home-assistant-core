@@ -3,6 +3,7 @@
 The v23 schema used for these tests has been slightly modified to add the
 EventData table to allow the recorder to startup successfully.
 """
+
 from functools import partial
 import importlib
 import json
@@ -161,13 +162,17 @@ def test_delete_duplicates(caplog: pytest.LogCaptureFixture, tmp_path: Path) -> 
     }
 
     # Create some duplicated statistics with schema version 23
-    with patch.object(recorder, "db_schema", old_db_schema), patch.object(
-        recorder.migration, "SCHEMA_VERSION", old_db_schema.SCHEMA_VERSION
-    ), patch(
-        CREATE_ENGINE_TARGET,
-        new=partial(
-            create_engine_test_for_schema_version_postfix,
-            schema_version_postfix=SCHEMA_VERSION_POSTFIX,
+    with (
+        patch.object(recorder, "db_schema", old_db_schema),
+        patch.object(
+            recorder.migration, "SCHEMA_VERSION", old_db_schema.SCHEMA_VERSION
+        ),
+        patch(
+            CREATE_ENGINE_TARGET,
+            new=partial(
+                create_engine_test_for_schema_version_postfix,
+                schema_version_postfix=SCHEMA_VERSION_POSTFIX,
+            ),
         ),
     ):
         hass = get_test_home_assistant()
@@ -341,13 +346,17 @@ def test_delete_duplicates_many(
     }
 
     # Create some duplicated statistics with schema version 23
-    with patch.object(recorder, "db_schema", old_db_schema), patch.object(
-        recorder.migration, "SCHEMA_VERSION", old_db_schema.SCHEMA_VERSION
-    ), patch(
-        CREATE_ENGINE_TARGET,
-        new=partial(
-            create_engine_test_for_schema_version_postfix,
-            schema_version_postfix=SCHEMA_VERSION_POSTFIX,
+    with (
+        patch.object(recorder, "db_schema", old_db_schema),
+        patch.object(
+            recorder.migration, "SCHEMA_VERSION", old_db_schema.SCHEMA_VERSION
+        ),
+        patch(
+            CREATE_ENGINE_TARGET,
+            new=partial(
+                create_engine_test_for_schema_version_postfix,
+                schema_version_postfix=SCHEMA_VERSION_POSTFIX,
+            ),
         ),
     ):
         hass = get_test_home_assistant()
@@ -498,13 +507,17 @@ def test_delete_duplicates_non_identical(
     }
 
     # Create some duplicated statistics with schema version 23
-    with patch.object(recorder, "db_schema", old_db_schema), patch.object(
-        recorder.migration, "SCHEMA_VERSION", old_db_schema.SCHEMA_VERSION
-    ), patch(
-        CREATE_ENGINE_TARGET,
-        new=partial(
-            create_engine_test_for_schema_version_postfix,
-            schema_version_postfix=SCHEMA_VERSION_POSTFIX,
+    with (
+        patch.object(recorder, "db_schema", old_db_schema),
+        patch.object(
+            recorder.migration, "SCHEMA_VERSION", old_db_schema.SCHEMA_VERSION
+        ),
+        patch(
+            CREATE_ENGINE_TARGET,
+            new=partial(
+                create_engine_test_for_schema_version_postfix,
+                schema_version_postfix=SCHEMA_VERSION_POSTFIX,
+            ),
         ),
     ):
         hass = get_test_home_assistant()
@@ -610,13 +623,17 @@ def test_delete_duplicates_short_term(
     }
 
     # Create some duplicated statistics with schema version 23
-    with patch.object(recorder, "db_schema", old_db_schema), patch.object(
-        recorder.migration, "SCHEMA_VERSION", old_db_schema.SCHEMA_VERSION
-    ), patch(
-        CREATE_ENGINE_TARGET,
-        new=partial(
-            create_engine_test_for_schema_version_postfix,
-            schema_version_postfix=SCHEMA_VERSION_POSTFIX,
+    with (
+        patch.object(recorder, "db_schema", old_db_schema),
+        patch.object(
+            recorder.migration, "SCHEMA_VERSION", old_db_schema.SCHEMA_VERSION
+        ),
+        patch(
+            CREATE_ENGINE_TARGET,
+            new=partial(
+                create_engine_test_for_schema_version_postfix,
+                schema_version_postfix=SCHEMA_VERSION_POSTFIX,
+            ),
         ),
     ):
         hass = get_test_home_assistant()

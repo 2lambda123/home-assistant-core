@@ -54,12 +54,15 @@ async def test_config_entry_not_ready_get_energy_use_data_error(
 
     get_devices_fixture = load_json_array_fixture("get_devices.json", DOMAIN)
 
-    with patch(
-        "homeassistant.components.aosmith.config_flow.AOSmithAPIClient.get_devices",
-        return_value=get_devices_fixture,
-    ), patch(
-        "homeassistant.components.aosmith.config_flow.AOSmithAPIClient.get_energy_use_data",
-        side_effect=AOSmithUnknownException("Unknown error"),
+    with (
+        patch(
+            "homeassistant.components.aosmith.config_flow.AOSmithAPIClient.get_devices",
+            return_value=get_devices_fixture,
+        ),
+        patch(
+            "homeassistant.components.aosmith.config_flow.AOSmithAPIClient.get_energy_use_data",
+            side_effect=AOSmithUnknownException("Unknown error"),
+        ),
     ):
         await hass.config_entries.async_setup(mock_config_entry.entry_id)
         await hass.async_block_till_done()

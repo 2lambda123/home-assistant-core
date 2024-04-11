@@ -1,4 +1,5 @@
 """Tests for Tradfri setup."""
+
 from unittest.mock import patch
 
 from homeassistant.components import tradfri

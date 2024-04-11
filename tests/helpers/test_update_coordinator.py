@@ -1,4 +1,5 @@
 """Tests for the update coordinator."""
+
 import asyncio
 from datetime import timedelta
 import logging

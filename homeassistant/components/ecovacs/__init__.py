@@ -1,4 +1,5 @@
 """Support for Ecovacs Deebot vacuums."""
+
 import logging
 import random
 import string

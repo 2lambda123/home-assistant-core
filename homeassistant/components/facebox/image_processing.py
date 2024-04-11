@@ -1,4 +1,5 @@
 """Component for facial detection and identification via facebox."""
+
 from __future__ import annotations
 
 import base64

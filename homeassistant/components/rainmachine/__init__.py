@@ -1,4 +1,5 @@
 """Support for RainMachine devices."""
+
 from __future__ import annotations
 
 import asyncio

@@ -1,4 +1,5 @@
 """Tests for device tracker entities."""
+
 import pytest
 
 from homeassistant.components.device_tracker.config_entry import (

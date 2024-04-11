@@ -1,4 +1,5 @@
 """Tests for Shelly utils."""
+
 from aioshelly.const import (
     MODEL_1,
     MODEL_1L,

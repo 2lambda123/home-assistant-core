@@ -1,4 +1,5 @@
 """The tests for Netgear LTE binary sensor platform."""
+
 import pytest
 
 from homeassistant.components.binary_sensor import BinarySensorDeviceClass

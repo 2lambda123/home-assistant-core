@@ -1,4 +1,5 @@
 """The tests for Netatmo camera."""
+
 from datetime import timedelta
 from unittest.mock import AsyncMock, patch
 
@@ -356,9 +357,10 @@ async def test_service_set_camera_light_invalid_type(
         "camera_light_mode": "on",
     }
 
-    with patch("pyatmo.home.Home.async_set_state") as mock_set_state, pytest.raises(
-        HomeAssistantError
-    ) as excinfo:
+    with (
+        patch("pyatmo.home.Home.async_set_state") as mock_set_state,
+        pytest.raises(HomeAssistantError) as excinfo,
+    ):
         await hass.services.async_call(
             "netatmo",
             SERVICE_SET_CAMERA_LIGHT,
@@ -381,15 +383,18 @@ async def test_camera_reconnect_webhook(hass: HomeAssistant, config_entry) -> No
         fake_post_hits += 1
         return await fake_post_request(*args, **kwargs)
 
-    with patch(
-        "homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth"
-    ) as mock_auth, patch(
-        "homeassistant.components.netatmo.data_handler.PLATFORMS", ["camera"]
-    ), patch(
-        "homeassistant.helpers.config_entry_oauth2_flow.async_get_config_entry_implementation",
-    ), patch(
-        "homeassistant.components.netatmo.webhook_generate_url",
-    ) as mock_webhook:
+    with (
+        patch(
+            "homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth"
+        ) as mock_auth,
+        patch("homeassistant.components.netatmo.data_handler.PLATFORMS", ["camera"]),
+        patch(
+            "homeassistant.helpers.config_entry_oauth2_flow.async_get_config_entry_implementation",
+        ),
+        patch(
+            "homeassistant.components.netatmo.webhook_generate_url",
+        ) as mock_webhook,
+    ):
         mock_auth.return_value.async_post_api_request.side_effect = fake_post
         mock_auth.return_value.async_addwebhook.side_effect = AsyncMock()
         mock_auth.return_value.async_dropwebhook.side_effect = AsyncMock()
@@ -475,14 +480,17 @@ async def test_setup_component_no_devices(hass: HomeAssistant, config_entry) -> 
         fake_post_hits += 1
         return await fake_post_request(*args, **kwargs)
 
-    with patch(
-        "homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth"
-    ) as mock_auth, patch(
-        "homeassistant.components.netatmo.data_handler.PLATFORMS", ["camera"]
-    ), patch(
-        "homeassistant.helpers.config_entry_oauth2_flow.async_get_config_entry_implementation",
-    ), patch(
-        "homeassistant.components.netatmo.webhook_generate_url",
+    with (
+        patch(
+            "homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth"
+        ) as mock_auth,
+        patch("homeassistant.components.netatmo.data_handler.PLATFORMS", ["camera"]),
+        patch(
+            "homeassistant.helpers.config_entry_oauth2_flow.async_get_config_entry_implementation",
+        ),
+        patch(
+            "homeassistant.components.netatmo.webhook_generate_url",
+        ),
     ):
         mock_auth.return_value.async_post_api_request.side_effect = fake_post_no_data
         mock_auth.return_value.async_addwebhook.side_effect = AsyncMock()
@@ -515,14 +523,17 @@ async def test_camera_image_raises_exception(
 
         return await fake_post_request(*args, **kwargs)
 
-    with patch(
-        "homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth"
-    ) as mock_auth, patch(
-        "homeassistant.components.netatmo.data_handler.PLATFORMS", ["camera"]
-    ), patch(
-        "homeassistant.helpers.config_entry_oauth2_flow.async_get_config_entry_implementation",
-    ), patch(
-        "homeassistant.components.netatmo.webhook_generate_url",
+    with (
+        patch(
+            "homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth"
+        ) as mock_auth,
+        patch("homeassistant.components.netatmo.data_handler.PLATFORMS", ["camera"]),
+        patch(
+            "homeassistant.helpers.config_entry_oauth2_flow.async_get_config_entry_implementation",
+        ),
+        patch(
+            "homeassistant.components.netatmo.webhook_generate_url",
+        ),
     ):
         mock_auth.return_value.async_post_api_request.side_effect = fake_post
         mock_auth.return_value.async_get_image.side_effect = fake_post

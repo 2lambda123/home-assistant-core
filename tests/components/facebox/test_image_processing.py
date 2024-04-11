@@ -1,4 +1,5 @@
 """The tests for the facebox component."""
+
 from http import HTTPStatus
 from unittest.mock import Mock, mock_open, patch
 

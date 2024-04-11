@@ -1,4 +1,5 @@
 """Test the Tessie cover platform."""
+
 from unittest.mock import patch
 
 import pytest
@@ -78,10 +79,13 @@ async def test_errors(hass: HomeAssistant) -> None:
     entity_id = "cover.test_charge_port_door"
 
     # Test setting cover open with unknown error
-    with patch(
-        "homeassistant.components.tessie.cover.open_unlock_charge_port",
-        side_effect=ERROR_UNKNOWN,
-    ) as mock_set, pytest.raises(HomeAssistantError) as error:
+    with (
+        patch(
+            "homeassistant.components.tessie.cover.open_unlock_charge_port",
+            side_effect=ERROR_UNKNOWN,
+        ) as mock_set,
+        pytest.raises(HomeAssistantError) as error,
+    ):
         await hass.services.async_call(
             COVER_DOMAIN,
             SERVICE_OPEN_COVER,
@@ -99,10 +103,13 @@ async def test_response_error(hass: HomeAssistant) -> None:
     entity_id = "cover.test_charge_port_door"
 
     # Test setting cover open with unknown error
-    with patch(
-        "homeassistant.components.tessie.cover.open_unlock_charge_port",
-        return_value=TEST_RESPONSE_ERROR,
-    ) as mock_set, pytest.raises(HomeAssistantError) as error:
+    with (
+        patch(
+            "homeassistant.components.tessie.cover.open_unlock_charge_port",
+            return_value=TEST_RESPONSE_ERROR,
+        ) as mock_set,
+        pytest.raises(HomeAssistantError) as error,
+    ):
         await hass.services.async_call(
             COVER_DOMAIN,
             SERVICE_OPEN_COVER,

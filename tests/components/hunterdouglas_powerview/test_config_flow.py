@@ -1,4 +1,5 @@
 """Test the Logitech Harmony Hub config flow."""
+
 import asyncio
 from ipaddress import ip_address
 import json
@@ -98,13 +99,16 @@ async def test_user_form(hass: HomeAssistant) -> None:
     assert result["errors"] == {}
 
     mock_powerview_userdata = _get_mock_powerview_userdata()
-    with patch(
-        "homeassistant.components.hunterdouglas_powerview.UserData",
-        return_value=mock_powerview_userdata,
-    ), patch(
-        "homeassistant.components.hunterdouglas_powerview.async_setup_entry",
-        return_value=True,
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.hunterdouglas_powerview.UserData",
+            return_value=mock_powerview_userdata,
+        ),
+        patch(
+            "homeassistant.components.hunterdouglas_powerview.async_setup_entry",
+            return_value=True,
+        ) as mock_setup_entry,
+    ):
         result2 = await hass.config_entries.flow.async_configure(
             result["flow_id"],
             {"host": "1.2.3.4"},
@@ -142,16 +146,20 @@ async def test_user_form_legacy(hass: HomeAssistant) -> None:
 
     mock_powerview_userdata = _get_mock_powerview_legacy_userdata()
     mock_powerview_fwversion = _get_mock_powerview_fwversion()
-    with patch(
-        "homeassistant.components.hunterdouglas_powerview.UserData",
-        return_value=mock_powerview_userdata,
-    ), patch(
-        "homeassistant.components.hunterdouglas_powerview.ApiEntryPoint",
-        return_value=mock_powerview_fwversion,
-    ), patch(
-        "homeassistant.components.hunterdouglas_powerview.async_setup_entry",
-        return_value=True,
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.hunterdouglas_powerview.UserData",
+            return_value=mock_powerview_userdata,
+        ),
+        patch(
+            "homeassistant.components.hunterdouglas_powerview.ApiEntryPoint",
+            return_value=mock_powerview_fwversion,
+        ),
+        patch(
+            "homeassistant.components.hunterdouglas_powerview.async_setup_entry",
+            return_value=True,
+        ) as mock_setup_entry,
+    ):
         result2 = await hass.config_entries.flow.async_configure(
             result["flow_id"],
             {"host": "1.2.3.4"},
@@ -236,13 +244,16 @@ async def test_form_homekit_and_dhcp(
         "name": "Hunter Douglas Powerview Hub",
     }
 
-    with patch(
-        "homeassistant.components.hunterdouglas_powerview.UserData",
-        return_value=mock_powerview_userdata,
-    ), patch(
-        "homeassistant.components.hunterdouglas_powerview.async_setup_entry",
-        return_value=True,
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.hunterdouglas_powerview.UserData",
+            return_value=mock_powerview_userdata,
+        ),
+        patch(
+            "homeassistant.components.hunterdouglas_powerview.async_setup_entry",
+            return_value=True,
+        ) as mock_setup_entry,
+    ):
         result2 = await hass.config_entries.flow.async_configure(result["flow_id"], {})
         await hass.async_block_till_done()
 

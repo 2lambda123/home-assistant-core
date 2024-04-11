@@ -1,4 +1,5 @@
 """Test the PrusaLink config flow."""
+
 import asyncio
 from unittest.mock import patch
 

@@ -1,4 +1,5 @@
 """Test the Tessie sensor platform."""
+
 from homeassistant.components.tessie.sensor import DESCRIPTIONS
 from homeassistant.const import STATE_UNKNOWN
 from homeassistant.core import HomeAssistant

@@ -1,4 +1,5 @@
 """Tests for the Device Registry."""
+
 from contextlib import nullcontext
 import time
 from typing import Any

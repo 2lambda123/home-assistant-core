@@ -1,4 +1,5 @@
 """Test the Qingping config flow."""
+
 import asyncio
 from unittest.mock import patch
 

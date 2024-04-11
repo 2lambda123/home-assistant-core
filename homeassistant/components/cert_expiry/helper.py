@@ -1,4 +1,5 @@
 """Helper functions for the Cert Expiry platform."""
+
 from functools import cache
 import socket
 import ssl
@@ -28,9 +29,10 @@ def get_cert(
     """Get the certificate for the host and port combination."""
     ctx = _get_default_ssl_context()
     address = (host, port)
-    with socket.create_connection(address, timeout=TIMEOUT) as sock, ctx.wrap_socket(
-        sock, server_hostname=address[0]
-    ) as ssock:
+    with (
+        socket.create_connection(address, timeout=TIMEOUT) as sock,
+        ctx.wrap_socket(sock, server_hostname=address[0]) as ssock,
+    ):
         cert = ssock.getpeercert()
         return cert
 

@@ -1,4 +1,5 @@
 """Component providing default configuration for new users."""
+
 from homeassistant.components.hassio import is_hassio
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_validation as cv

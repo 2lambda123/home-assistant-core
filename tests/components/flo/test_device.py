@@ -1,4 +1,5 @@
 """Define tests for device-related endpoints."""
+
 from datetime import timedelta
 from unittest.mock import patch
 
@@ -89,8 +90,11 @@ async def test_device(
     assert aioclient_mock.call_count == call_count + 6
 
     # test error sending device ping
-    with patch(
-        "homeassistant.components.flo.device.FloDeviceDataUpdateCoordinator.send_presence_ping",
-        side_effect=RequestError,
-    ), pytest.raises(UpdateFailed):
+    with (
+        patch(
+            "homeassistant.components.flo.device.FloDeviceDataUpdateCoordinator.send_presence_ping",
+            side_effect=RequestError,
+        ),
+        pytest.raises(UpdateFailed),
+    ):
         await valve._async_update_data()

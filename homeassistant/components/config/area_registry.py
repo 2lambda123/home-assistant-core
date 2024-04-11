@@ -1,4 +1,5 @@
 """HTTP views to interact with the area registry."""
+
 from typing import Any
 
 import voluptuous as vol

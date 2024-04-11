@@ -1,4 +1,5 @@
 """The test for the geo rss events sensor platform."""
+
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -69,9 +70,10 @@ async def test_setup(hass: HomeAssistant, mock_feed) -> None:
 
     utcnow = dt_util.utcnow()
     # Patching 'utcnow' to gain more control over the timed update.
-    with patch(
-        "homeassistant.util.dt.utcnow", return_value=utcnow
-    ), assert_setup_component(1, sensor.DOMAIN):
+    with (
+        patch("homeassistant.util.dt.utcnow", return_value=utcnow),
+        assert_setup_component(1, sensor.DOMAIN),
+    ):
         assert await async_setup_component(hass, sensor.DOMAIN, VALID_CONFIG)
         # Artificially trigger update.
         hass.bus.fire(EVENT_HOMEASSISTANT_START)

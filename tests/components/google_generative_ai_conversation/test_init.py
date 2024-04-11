@@ -1,4 +1,5 @@
 """Tests for the Google Generative AI Conversation integration."""
+
 from unittest.mock import patch
 
 from google.api_core.exceptions import ClientError
@@ -123,9 +124,12 @@ async def test_template_error(
             "prompt": "talk like a {% if True %}smarthome{% else %}pirate please.",
         },
     )
-    with patch(
-        "google.generativeai.get_model",
-    ), patch("google.generativeai.chat_async"):
+    with (
+        patch(
+            "google.generativeai.get_model",
+        ),
+        patch("google.generativeai.chat_async"),
+    ):
         await hass.config_entries.async_setup(mock_config_entry.entry_id)
         await hass.async_block_till_done()
         result = await conversation.async_converse(

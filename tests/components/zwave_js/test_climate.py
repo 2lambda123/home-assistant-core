@@ -1,4 +1,5 @@
 """Test the Z-Wave JS climate platform."""
+
 import pytest
 from zwave_js_server.const import CommandClass
 from zwave_js_server.const.command_class.thermostat import (

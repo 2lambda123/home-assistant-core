@@ -1,4 +1,5 @@
 """Tests for cloud tts."""
+
 from collections.abc import Callable, Coroutine
 from http import HTTPStatus
 from typing import Any

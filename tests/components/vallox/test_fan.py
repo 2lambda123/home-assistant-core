@@ -1,4 +1,5 @@
 """Tests for Vallox fan platform."""
+
 from unittest.mock import call
 
 import pytest
@@ -124,9 +125,11 @@ async def test_turn_on_with_parameters(
     hass: HomeAssistant,
 ) -> None:
     """Test turn on/off."""
-    with patch_metrics(
-        metrics=initial_metrics
-    ), patch_metrics_set() as metrics_set, patch_profile_set() as profile_set:
+    with (
+        patch_metrics(metrics=initial_metrics),
+        patch_metrics_set() as metrics_set,
+        patch_profile_set() as profile_set,
+    ):
         await hass.config_entries.async_setup(mock_entry.entry_id)
         await hass.async_block_till_done()
         await hass.services.async_call(
@@ -228,8 +231,10 @@ async def test_set_fan_speed(
     hass: HomeAssistant,
 ) -> None:
     """Test set fan speed percentage."""
-    with patch_profile(profile), patch_metrics_set() as metrics_set, patch_metrics(
-        {"A_CYC_MODE": 0}
+    with (
+        patch_profile(profile),
+        patch_metrics_set() as metrics_set,
+        patch_metrics({"A_CYC_MODE": 0}),
     ):
         await hass.config_entries.async_setup(mock_entry.entry_id)
         await hass.async_block_till_done()
@@ -247,8 +252,9 @@ async def test_set_fan_speed_exception(
     hass: HomeAssistant,
 ) -> None:
     """Test set fan speed percentage."""
-    with patch_metrics_set() as metrics_set, patch_metrics(
-        {"A_CYC_MODE": 0, "A_CYC_HOME_SPEED_SETTING": 30}
+    with (
+        patch_metrics_set() as metrics_set,
+        patch_metrics({"A_CYC_MODE": 0, "A_CYC_HOME_SPEED_SETTING": 30}),
     ):
         metrics_set.side_effect = ValloxApiException("Fake failure")
         await hass.config_entries.async_setup(mock_entry.entry_id)

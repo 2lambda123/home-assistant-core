@@ -1,4 +1,5 @@
 """The tests for the water heater component."""
+
 from __future__ import annotations
 
 from unittest.mock import AsyncMock, MagicMock

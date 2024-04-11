@@ -1,4 +1,5 @@
 """Virtual gateway for Zigbee Home Automation."""
+
 from __future__ import annotations
 
 import asyncio
@@ -129,9 +130,9 @@ class ZHAGateway:
         self._groups: dict[int, ZHAGroup] = {}
         self.application_controller: ControllerApplication = None
         self.coordinator_zha_device: ZHADevice = None  # type: ignore[assignment]
-        self._device_registry: collections.defaultdict[
-            EUI64, list[EntityReference]
-        ] = collections.defaultdict(list)
+        self._device_registry: collections.defaultdict[EUI64, list[EntityReference]] = (
+            collections.defaultdict(list)
+        )
         self._log_levels: dict[str, dict[str, int]] = {
             DEBUG_LEVEL_ORIGINAL: async_capture_log_levels(),
             DEBUG_LEVEL_CURRENT: async_capture_log_levels(),

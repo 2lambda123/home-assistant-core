@@ -1,4 +1,5 @@
 """Tests for the Tankerkoening integration."""
+
 from __future__ import annotations
 
 from unittest.mock import patch
@@ -80,12 +81,15 @@ async def test_entry_diagnostics(
     snapshot: SnapshotAssertion,
 ) -> None:
     """Test config entry diagnostics."""
-    with patch(
-        "homeassistant.components.tankerkoenig.coordinator.pytankerkoenig.getStationData",
-        return_value=MOCK_STATION_DATA,
-    ), patch(
-        "homeassistant.components.tankerkoenig.coordinator.pytankerkoenig.getPriceList",
-        return_value=MOCK_STATION_PRICES,
+    with (
+        patch(
+            "homeassistant.components.tankerkoenig.coordinator.pytankerkoenig.getStationData",
+            return_value=MOCK_STATION_DATA,
+        ),
+        patch(
+            "homeassistant.components.tankerkoenig.coordinator.pytankerkoenig.getPriceList",
+            return_value=MOCK_STATION_PRICES,
+        ),
     ):
         entry = MockConfigEntry(
             domain=DOMAIN,

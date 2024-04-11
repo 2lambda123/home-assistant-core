@@ -1,4 +1,5 @@
 """Support for Overkiz (virtual) numbers."""
+
 from __future__ import annotations
 
 import asyncio
@@ -38,9 +39,9 @@ class OverkizNumberDescription(NumberEntityDescription, OverkizNumberDescription
     """Class to describe an Overkiz number."""
 
     inverted: bool = False
-    set_native_value: Callable[
-        [float, Callable[..., Awaitable[None]]], Awaitable[None]
-    ] | None = None
+    set_native_value: (
+        Callable[[float, Callable[..., Awaitable[None]]], Awaitable[None]] | None
+    ) = None
 
 
 async def _async_set_native_value_boost_mode_duration(

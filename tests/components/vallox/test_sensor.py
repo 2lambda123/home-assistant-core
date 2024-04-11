@@ -50,10 +50,13 @@ async def test_remaining_filter_returns_timestamp(
 ) -> None:
     """Test that the remaining time for filter sensor returns a timestamp."""
     # Act
-    with patch(
-        "homeassistant.components.vallox._api_get_next_filter_change_date",
-        return_value=dt_util.now().date(),
-    ), patch_metrics(metrics={}):
+    with (
+        patch(
+            "homeassistant.components.vallox._api_get_next_filter_change_date",
+            return_value=dt_util.now().date(),
+        ),
+        patch_metrics(metrics={}),
+    ):
         await hass.config_entries.async_setup(mock_entry.entry_id)
         await hass.async_block_till_done()
 
@@ -67,10 +70,13 @@ async def test_remaining_time_for_filter_none_returned_from_vallox(
 ) -> None:
     """Test that the remaining time for filter sensor returns 'unknown' when Vallox returns None."""
     # Act
-    with patch(
-        "homeassistant.components.vallox._api_get_next_filter_change_date",
-        return_value=None,
-    ), patch_metrics(metrics={}):
+    with (
+        patch(
+            "homeassistant.components.vallox._api_get_next_filter_change_date",
+            return_value=None,
+        ),
+        patch_metrics(metrics={}),
+    ):
         await hass.config_entries.async_setup(mock_entry.entry_id)
         await hass.async_block_till_done()
 
@@ -97,10 +103,13 @@ async def test_remaining_time_for_filter_in_the_future(
     mocked_filter_end_date = dt_util.now().date() + timedelta(days=remaining_days)
 
     # Act
-    with patch(
-        "homeassistant.components.vallox._api_get_next_filter_change_date",
-        return_value=mocked_filter_end_date,
-    ), patch_metrics(metrics={}):
+    with (
+        patch(
+            "homeassistant.components.vallox._api_get_next_filter_change_date",
+            return_value=mocked_filter_end_date,
+        ),
+        patch_metrics(metrics={}),
+    ):
         await hass.config_entries.async_setup(mock_entry.entry_id)
         await hass.async_block_till_done()
 
@@ -121,10 +130,13 @@ async def test_remaining_time_for_filter_today(
     mocked_filter_end_date = dt_util.now().date() + timedelta(days=remaining_days)
 
     # Act
-    with patch(
-        "homeassistant.components.vallox._api_get_next_filter_change_date",
-        return_value=mocked_filter_end_date,
-    ), patch_metrics(metrics={}):
+    with (
+        patch(
+            "homeassistant.components.vallox._api_get_next_filter_change_date",
+            return_value=mocked_filter_end_date,
+        ),
+        patch_metrics(metrics={}),
+    ):
         await hass.config_entries.async_setup(mock_entry.entry_id)
         await hass.async_block_till_done()
 
@@ -145,10 +157,13 @@ async def test_remaining_time_for_filter_in_the_past(
     mocked_filter_end_date = dt_util.now().date() + timedelta(days=remaining_days)
 
     # Act
-    with patch(
-        "homeassistant.components.vallox._api_get_next_filter_change_date",
-        return_value=mocked_filter_end_date,
-    ), patch_metrics(metrics={}):
+    with (
+        patch(
+            "homeassistant.components.vallox._api_get_next_filter_change_date",
+            return_value=mocked_filter_end_date,
+        ),
+        patch_metrics(metrics={}),
+    ):
         await hass.config_entries.async_setup(mock_entry.entry_id)
         await hass.async_block_till_done()
 

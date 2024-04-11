@@ -1,4 +1,5 @@
 """deCONZ service tests."""
+
 from unittest.mock import patch
 
 from homeassistant.components.unifi.const import DOMAIN as UNIFI_DOMAIN

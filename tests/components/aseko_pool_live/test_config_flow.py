@@ -1,4 +1,5 @@
 """Test the Aseko Pool Live config flow."""
+
 from unittest.mock import AsyncMock, patch
 
 from aioaseko import AccountInfo, APIUnavailable, InvalidAuthCredentials
@@ -20,15 +21,19 @@ async def test_form(hass: HomeAssistant) -> None:
     assert result["type"] == FlowResultType.FORM
     assert result["errors"] == {}
 
-    with patch(
-        "homeassistant.components.aseko_pool_live.config_flow.WebAccount.login",
-        return_value=AccountInfo("aseko@example.com", "a_user_id", "any_language"),
-    ), patch(
-        "homeassistant.components.aseko_pool_live.config_flow.MobileAccount",
-    ) as mock_mobile_account, patch(
-        "homeassistant.components.aseko_pool_live.async_setup_entry",
-        return_value=True,
-    ) as mock_setup_entry:
+    with (
+        patch(
+            "homeassistant.components.aseko_pool_live.config_flow.WebAccount.login",
+            return_value=AccountInfo("aseko@example.com", "a_user_id", "any_language"),
+        ),
+        patch(
+            "homeassistant.components.aseko_pool_live.config_flow.MobileAccount",
+        ) as mock_mobile_account,
+        patch(
+            "homeassistant.components.aseko_pool_live.async_setup_entry",
+            return_value=True,
+        ) as mock_setup_entry,
+    ):
         mobile_account = mock_mobile_account.return_value
         mobile_account.login = AsyncMock()
         mobile_account.access_token = "any_access_token"
@@ -66,13 +71,16 @@ async def test_get_account_info_exceptions(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
     )
 
-    with patch(
-        "homeassistant.components.aseko_pool_live.config_flow.WebAccount.login",
-        return_value=AccountInfo("aseko@example.com", "a_user_id", "any_language"),
-        side_effect=error_web,
-    ), patch(
-        "homeassistant.components.aseko_pool_live.config_flow.MobileAccount.login",
-        side_effect=error_mobile,
+    with (
+        patch(
+            "homeassistant.components.aseko_pool_live.config_flow.WebAccount.login",
+            return_value=AccountInfo("aseko@example.com", "a_user_id", "any_language"),
+            side_effect=error_web,
+        ),
+        patch(
+            "homeassistant.components.aseko_pool_live.config_flow.MobileAccount.login",
+            side_effect=error_mobile,
+        ),
     ):
         result2 = await hass.config_entries.flow.async_configure(
             result["flow_id"],

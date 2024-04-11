@@ -1,4 +1,5 @@
 """Media player support for Bravia TV integration."""
+
 from __future__ import annotations
 
 from typing import Any

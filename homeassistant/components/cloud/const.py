@@ -1,4 +1,5 @@
 """Constants for the cloud component."""
+
 DOMAIN = "cloud"
 DATA_PLATFORMS_SETUP = "cloud_platforms_setup"
 REQUEST_TIMEOUT = 10
