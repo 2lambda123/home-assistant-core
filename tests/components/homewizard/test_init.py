@@ -1,6 +1,6 @@
 """Tests for the homewizard component."""
 
-from asyncio import TimeoutError
+import builtins
 from unittest.mock import MagicMock
 
 from homewizard_energy.errors import DisabledError, HomeWizardEnergyException
@@ -40,7 +40,7 @@ async def test_load_failed_host_unavailable(
     mock_homewizardenergy: MagicMock,
 ) -> None:
     """Test setup handles unreachable host."""
-    mock_homewizardenergy.device.side_effect = TimeoutError()
+    mock_homewizardenergy.device.side_effect = builtins.TimeoutError()
     mock_config_entry.add_to_hass(hass)
     await hass.config_entries.async_setup(mock_config_entry.entry_id)
     await hass.async_block_till_done()

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from asyncio import TimeoutError
+import builtins
 import os
 from typing import Any
 from unittest.mock import ANY, patch
@@ -671,7 +671,7 @@ async def test_supervisor_issues_suggestions_fail(
     )
     aioclient_mock.get(
         "http://127.0.0.1/resolution/issue/1234/suggestions",
-        exc=TimeoutError(),
+        exc=builtins.TimeoutError(),
     )
 
     result = await async_setup_component(hass, "hassio", {})
