@@ -146,13 +146,13 @@ async def test_operation_list(hass: HomeAssistant) -> None:
         api = melissa_mock()
         device = (await api.async_fetch_devices())[_SERIAL]
         thermostat = MelissaClimate(api, _SERIAL, device)
-        assert [
+        assert thermostat.hvac_modes == [
             HVACMode.HEAT,
             HVACMode.COOL,
             HVACMode.DRY,
             HVACMode.FAN_ONLY,
             HVACMode.OFF,
-        ] == thermostat.hvac_modes
+        ]
 
 
 async def test_fan_modes(hass: HomeAssistant) -> None:
@@ -161,7 +161,7 @@ async def test_fan_modes(hass: HomeAssistant) -> None:
         api = melissa_mock()
         device = (await api.async_fetch_devices())[_SERIAL]
         thermostat = MelissaClimate(api, _SERIAL, device)
-        assert ["auto", FAN_HIGH, FAN_MEDIUM, FAN_LOW] == thermostat.fan_modes
+        assert thermostat.fan_modes == ["auto", FAN_HIGH, FAN_MEDIUM, FAN_LOW]
 
 
 async def test_target_temperature(hass: HomeAssistant) -> None:
