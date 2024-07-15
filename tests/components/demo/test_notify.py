@@ -128,11 +128,11 @@ async def test_method_forwards_correct_data(hass: HomeAssistant, events) -> None
     await hass.async_block_till_done()
     assert len(events) == 1
     data = events[0].data
-    assert {
+    assert data == {
         "message": "my message",
         "title": "my title",
         "data": {"hello": "world"},
-    } == data
+    }
 
 
 async def test_calling_notify_from_script_loaded_from_yaml_without_title(
@@ -153,10 +153,10 @@ async def test_calling_notify_from_script_loaded_from_yaml_without_title(
     await hass.services.async_call("script", "test")
     await hass.async_block_till_done()
     assert len(events) == 1
-    assert {
+    assert events[0].data == {
         "message": "Test 123 4",
         "data": {"push": {"sound": "US-EN-Morgan-Freeman-Roommate-Is-Arriving.wav"}},
-    } == events[0].data
+    }
 
 
 async def test_calling_notify_from_script_loaded_from_yaml_with_title(
@@ -177,11 +177,11 @@ async def test_calling_notify_from_script_loaded_from_yaml_with_title(
     await hass.services.async_call("script", "test")
     await hass.async_block_till_done()
     assert len(events) == 1
-    assert {
+    assert events[0].data == {
         "message": "Test 123 4",
         "title": "Test",
         "data": {"push": {"sound": "US-EN-Morgan-Freeman-Roommate-Is-Arriving.wav"}},
-    } == events[0].data
+    }
 
 
 async def test_targets_are_services(hass: HomeAssistant) -> None:
@@ -209,9 +209,9 @@ async def test_messages_to_targets_route(
 
     data = calls[0][0].data
 
-    assert {
+    assert data == {
         "message": "my message",
         "target": ["test target id"],
         "title": "my title",
         "data": {"hello": "world"},
-    } == data
+    }

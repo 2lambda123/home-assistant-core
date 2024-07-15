@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+from _collections_abc import Callable
 from dataclasses import dataclass
 
-from _collections_abc import Callable
 from renson_endura_delta.renson import RensonVentilation
 
 from homeassistant.components.button import (
