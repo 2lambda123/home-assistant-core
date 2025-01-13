@@ -147,13 +147,13 @@ class KNXTestKit:
                 f" {group_address} - {payload}"
             ) from err
 
-        assert isinstance(
-            telegram.payload, apci_type
-        ), f"APCI type mismatch in {telegram} - Expected: {apci_type.__name__}"
+        assert isinstance(telegram.payload, apci_type), (
+            f"APCI type mismatch in {telegram} - Expected: {apci_type.__name__}"
+        )
 
-        assert (
-            str(telegram.destination_address) == group_address
-        ), f"Group address mismatch in {telegram} - Expected: {group_address}"
+        assert str(telegram.destination_address) == group_address, (
+            f"Group address mismatch in {telegram} - Expected: {group_address}"
+        )
 
         if payload is not None:
             assert (

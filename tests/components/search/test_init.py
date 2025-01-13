@@ -275,9 +275,9 @@ async def test_search(
         # Add the item we searched for, it's omitted from results
         results.setdefault(search_type, set()).add(search_id)
 
-        assert (
-            results == expected
-        ), f"Results for {search_type}/{search_id} do not match up"
+        assert results == expected, (
+            f"Results for {search_type}/{search_id} do not match up"
+        )
 
     # For combined things, needs to return everything.
     expected_combined = {
@@ -309,9 +309,9 @@ async def test_search(
         results = searcher.async_search(search_type, search_id)
         # Add the item we searched for, it's omitted from results
         results.setdefault(search_type, set()).add(search_id)
-        assert (
-            results == expected_combined
-        ), f"Results for {search_type}/{search_id} do not match up"
+        assert results == expected_combined, (
+            f"Results for {search_type}/{search_id} do not match up"
+        )
 
     for search_type, search_id in (
         ("entity", "automation.non_existing"),

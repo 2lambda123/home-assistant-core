@@ -67,7 +67,7 @@ class AdvantageAirZoneMotion(AdvantageAirZoneEntity, BinarySensorEntity):
     def __init__(self, instance: AdvantageAirData, ac_key: str, zone_key: str) -> None:
         """Initialize an Advantage Air Zone Motion sensor."""
         super().__init__(instance, ac_key, zone_key)
-        self._attr_name = f'{self._zone["name"]} motion'
+        self._attr_name = f"{self._zone['name']} motion"
         self._attr_unique_id += "-motion"
 
     @property
@@ -85,7 +85,7 @@ class AdvantageAirZoneMyZone(AdvantageAirZoneEntity, BinarySensorEntity):
     def __init__(self, instance: AdvantageAirData, ac_key: str, zone_key: str) -> None:
         """Initialize an Advantage Air Zone MyZone sensor."""
         super().__init__(instance, ac_key, zone_key)
-        self._attr_name = f'{self._zone["name"]} myZone'
+        self._attr_name = f"{self._zone['name']} myZone"
         self._attr_unique_id += "-myzone"
 
     @property

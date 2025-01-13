@@ -148,7 +148,7 @@ async def async_setup_platform(
     broken_observations: list[dict[str, Any]] = []
     for observation in observations:
         if CONF_P_GIVEN_F not in observation:
-            text: str = f"{name}/{observation.get(CONF_ENTITY_ID,'')}{observation.get(CONF_VALUE_TEMPLATE,'')}"
+            text: str = f"{name}/{observation.get(CONF_ENTITY_ID, '')}{observation.get(CONF_VALUE_TEMPLATE, '')}"
             raise_no_prob_given_false(hass, text)
             _LOGGER.error("Missing prob_given_false YAML entry for %s", text)
             broken_observations.append(observation)

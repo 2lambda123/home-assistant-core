@@ -1642,14 +1642,14 @@ async def test_updating_unique_id(
     registry.async_get_or_create(
         SWITCH_DOMAIN,
         UNIFI_DOMAIN,
-        f'{poe_device["mac"]}-poe-1',
+        f"{poe_device['mac']}-poe-1",
         suggested_object_id="switch_port_1_poe",
         config_entry=config_entry,
     )
     registry.async_get_or_create(
         SWITCH_DOMAIN,
         UNIFI_DOMAIN,
-        f'{OUTLET_UP1["mac"]}-outlet-1',
+        f"{OUTLET_UP1['mac']}-outlet-1",
         suggested_object_id="plug_outlet_1",
         config_entry=config_entry,
     )
