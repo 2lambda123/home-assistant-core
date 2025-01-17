@@ -1020,16 +1020,16 @@ def assert_setup_component(count, domain=None):
         yield config
 
     if domain is None:
-        assert (
-            len(config) == 1
-        ), f"assert_setup_component requires DOMAIN: {list(config.keys())}"
+        assert len(config) == 1, (
+            f"assert_setup_component requires DOMAIN: {list(config.keys())}"
+        )
         domain = list(config.keys())[0]
 
     res = config.get(domain)
     res_len = 0 if res is None else len(res)
-    assert (
-        res_len == count
-    ), f"setup_component failed, expected {count} got {res_len}: {res}"
+    assert res_len == count, (
+        f"setup_component failed, expected {count} got {res_len}: {res}"
+    )
 
 
 def init_recorder_component(hass, add_config=None, db_url="sqlite://"):

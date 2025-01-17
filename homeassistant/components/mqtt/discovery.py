@@ -201,8 +201,7 @@ async def async_start(  # noqa: C901
                 MQTT_ORIGIN_INFO_SCHEMA(discovery_payload[CONF_ORIGIN])
             except Exception:  # pylint: disable=broad-except
                 _LOGGER.warning(
-                    "Unable to parse origin information "
-                    "from discovery message, got %s",
+                    "Unable to parse origin information from discovery message, got %s",
                     discovery_payload[CONF_ORIGIN],
                 )
                 return

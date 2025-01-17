@@ -593,7 +593,7 @@ class EntityRegistry:
             tries += 1
             len_suffix = len(str(tries)) + 1
             test_string = (
-                f"{preferred_string[:MAX_LENGTH_STATE_ENTITY_ID-len_suffix]}_{tries}"
+                f"{preferred_string[: MAX_LENGTH_STATE_ENTITY_ID - len_suffix]}_{tries}"
             )
 
         return test_string

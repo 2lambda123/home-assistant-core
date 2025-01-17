@@ -218,7 +218,7 @@ class APIStatesView(HomeAssistantView):
                 if entity_perm(state.entity_id, "read")
             )
         response = web.Response(
-            body=f'[{",".join(states)}]',
+            body=f"[{','.join(states)}]",
             content_type=CONTENT_TYPE_JSON,
             zlib_executor_size=32768,
         )

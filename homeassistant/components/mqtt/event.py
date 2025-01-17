@@ -160,10 +160,7 @@ class MqttEvent(MqttEntity, EventEntity):
                 )
             except KeyError:
                 _LOGGER.warning(
-                    (
-                        "`event_type` missing in JSON event payload, "
-                        " '%s' on topic %s"
-                    ),
+                    ("`event_type` missing in JSON event payload,  '%s' on topic %s"),
                     payload,
                     msg.topic,
                 )

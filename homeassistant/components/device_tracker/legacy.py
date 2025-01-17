@@ -947,9 +947,9 @@ class DeviceScanner:
 
     async def async_scan_devices(self) -> list[str]:
         """Scan for devices."""
-        assert (
-            self.hass is not None
-        ), "hass should be set by async_setup_scanner_platform"
+        assert self.hass is not None, (
+            "hass should be set by async_setup_scanner_platform"
+        )
         return await self.hass.async_add_executor_job(self.scan_devices)
 
     def get_device_name(self, device: str) -> str | None:
@@ -958,9 +958,9 @@ class DeviceScanner:
 
     async def async_get_device_name(self, device: str) -> str | None:
         """Get the name of a device."""
-        assert (
-            self.hass is not None
-        ), "hass should be set by async_setup_scanner_platform"
+        assert self.hass is not None, (
+            "hass should be set by async_setup_scanner_platform"
+        )
         return await self.hass.async_add_executor_job(self.get_device_name, device)
 
     def get_extra_attributes(self, device: str) -> dict:
@@ -969,9 +969,9 @@ class DeviceScanner:
 
     async def async_get_extra_attributes(self, device: str) -> dict:
         """Get the extra attributes of a device."""
-        assert (
-            self.hass is not None
-        ), "hass should be set by async_setup_scanner_platform"
+        assert self.hass is not None, (
+            "hass should be set by async_setup_scanner_platform"
+        )
         return await self.hass.async_add_executor_job(self.get_extra_attributes, device)
 
 

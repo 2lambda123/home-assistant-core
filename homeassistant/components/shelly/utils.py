@@ -125,7 +125,7 @@ def get_block_channel_name(device: BlockDevice, block: Block | None) -> str:
     else:
         base = ord("1")
 
-    return f"{entity_name} channel {chr(int(block.channel)+base)}"
+    return f"{entity_name} channel {chr(int(block.channel) + base)}"
 
 
 def is_block_momentary_input(
@@ -190,7 +190,7 @@ def get_block_input_triggers(
         subtype = "button"
     else:
         assert block.channel
-        subtype = f"button{int(block.channel)+1}"
+        subtype = f"button{int(block.channel) + 1}"
 
     if device.settings["device"]["type"] in SHBTN_MODELS:
         trigger_types = SHBTN_INPUTS_EVENTS_TYPES
@@ -378,7 +378,7 @@ def get_rpc_input_triggers(device: RpcDevice) -> list[tuple[str, str]]:
             continue
 
         for trigger_type in RPC_INPUTS_EVENTS_TYPES:
-            subtype = f"button{id_+1}"
+            subtype = f"button{id_ + 1}"
             triggers.append((trigger_type, subtype))
 
     return triggers

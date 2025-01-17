@@ -187,8 +187,7 @@ async def async_subscribe(
         mqtt_data = get_mqtt_data(hass)
     except KeyError as exc:
         raise HomeAssistantError(
-            f"Cannot subscribe to topic '{topic}', "
-            "make sure MQTT is set up correctly",
+            f"Cannot subscribe to topic '{topic}', make sure MQTT is set up correctly",
             translation_key="mqtt_not_setup_cannot_subscribe",
             translation_domain=DOMAIN,
             translation_placeholders={"topic": topic},

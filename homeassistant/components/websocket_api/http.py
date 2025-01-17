@@ -57,7 +57,7 @@ class WebSocketAdapter(logging.LoggerAdapter):
     def process(self, msg: str, kwargs: Any) -> tuple[str, Any]:
         """Add connid to websocket log messages."""
         assert self.extra is not None
-        return f'[{self.extra["connid"]}] {msg}', kwargs
+        return f"[{self.extra['connid']}] {msg}", kwargs
 
 
 class WebSocketHandler:
@@ -160,7 +160,7 @@ class WebSocketHandler:
                     messages.append(message)
                     messages_remaining -= 1
 
-                coalesced_messages = f'[{",".join(messages)}]'
+                coalesced_messages = f"[{','.join(messages)}]"
                 if debug_enabled:
                     debug("%s: Sending %s", self.description, coalesced_messages)
                 await send_str(coalesced_messages)

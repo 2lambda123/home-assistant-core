@@ -944,14 +944,14 @@ async def test_restoring_client(
     registry.async_get_or_create(  # Unique ID updated
         TRACKER_DOMAIN,
         UNIFI_DOMAIN,
-        f'{restored["mac"]}-site_id',
+        f"{restored['mac']}-site_id",
         suggested_object_id=restored["hostname"],
         config_entry=config_entry,
     )
     registry.async_get_or_create(  # Unique ID already updated
         TRACKER_DOMAIN,
         UNIFI_DOMAIN,
-        f'site_id-{client["mac"]}',
+        f"site_id-{client['mac']}",
         suggested_object_id=client["hostname"],
         config_entry=config_entry,
     )

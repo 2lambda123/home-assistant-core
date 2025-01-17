@@ -145,8 +145,7 @@ async def test_view_empty_namespace(client, sensor_entities) -> None:
 
     assert "# HELP python_info Python platform information" in body
     assert (
-        "# HELP python_gc_objects_collected_total "
-        "Objects collected during gc" in body
+        "# HELP python_gc_objects_collected_total Objects collected during gc" in body
     )
 
     assert (
@@ -169,8 +168,7 @@ async def test_view_default_namespace(client, sensor_entities) -> None:
 
     assert "# HELP python_info Python platform information" in body
     assert (
-        "# HELP python_gc_objects_collected_total "
-        "Objects collected during gc" in body
+        "# HELP python_gc_objects_collected_total Objects collected during gc" in body
     )
 
     assert (
